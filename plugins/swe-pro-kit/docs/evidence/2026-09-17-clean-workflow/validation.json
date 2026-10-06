@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-17",
+  "plugin_version": "0.3.2",
+  "baseline_commit": "248e023b5450943924b9a1abe2bd56d94855a093",
+  "delivery_lock_sha256": "fac6511ce9973a344076fb4d3e45b1d5ef6b0ed45fe3171a0a26f065550e3665",
+  "scope": "Independent clean workflow; historical scheduler is opt-in legacy-workflow. Atomic profiles, composition prompts and stage input templates unchanged.",
+  "python_regression": {
+    "passed": 162,
+    "seconds": 45.04,
+    "real_chrys_base": "0dd38d8d42ad65480f19279ea71383ede89f6a83",
+    "real_model": false
+  },
+  "npm_test": {
+    "passed": 166
+  },
+  "swe_delivery_locks_and_rebuild": {
+    "passed": 4
+  },
+  "installed_delivery": {
+    "runtime_tests_passed": 5,
+    "covers": [
+      "single-decoder",
+      "three-decoder",
+      "legacy-workflow",
+      "sub-agent",
+      "sub-agent-serial"
+    ],
+    "inspect": "passed",
+    "remove": "passed",
+    "six_host_files_restored": true,
+    "runtime": "MockChatClient via real Chrys/Harbor in disposable local task repositories"
+  },
+  "benchmark_performance": "not measured for this version"
+}

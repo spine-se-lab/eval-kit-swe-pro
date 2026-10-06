@@ -1,0 +1,9 @@
+diff --git a/header.html b/header.html
+index de292ff..08ab64f 100755
+--- a/header.html
++++ b/header.html
+@@ -1,3 +1,3 @@
+ <nav class="site-header">
+-  <a href="/fundraising/">{% translate "Donate" %}</a>
++  <a href="/fundraising/">{% translate "Sponsor" %}</a>
+ </nav>

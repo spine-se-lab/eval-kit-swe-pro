@@ -1,0 +1,14 @@
+# github.com/gravitational/teleport/lib/benchmark [github.com/gravitational/teleport/lib/benchmark.test]
+lib/benchmark/linear_test.go:31:3: unknown field 'Interactive' in struct literal of type Config
+lib/benchmark/linear_test.go:43:3: unknown field 'config' in struct literal of type Linear
+lib/benchmark/linear_test.go:60:3: unknown field 'Interactive' in struct literal of type Config
+lib/benchmark/linear_test.go:72:3: unknown field 'config' in struct literal of type Linear
+lib/benchmark/linear_test.go:97:3: unknown field 'config' in struct literal of type Linear
+# github.com/mattn/go-sqlite3
+sqlite3-binding.c: In function 'sqlite3SelectNew':
+sqlite3-binding.c:123303:10: warning: function may return address of local variable [-Wreturn-local-addr]
+123303 |   return pNew;
+       |          ^~~~
+sqlite3-binding.c:123263:10: note: declared here
+123263 |   Select standin;
+       |          ^~~~~~~

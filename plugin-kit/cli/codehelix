@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+'use strict';
+// Retained business entry: usable after the original distribution is removed.
+const { runCommand } = require('./commands.js');
+const [name, ...args] = process.argv.slice(2);
+if (!name || name === '--help') {
+  process.stdout.write('codehelix <installed-command> [--home PATH] [--deployment ID] <operation> [options]\n');
+} else {
+  runCommand(name, args).then(code => { process.exitCode = code; }).catch(error => {
+    process.stderr.write(error.message + '\n'); process.exitCode = 1;
+  });
+}

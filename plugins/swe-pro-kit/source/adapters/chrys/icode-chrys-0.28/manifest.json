@@ -1,0 +1,51 @@
+{
+  "schema": "swe-pro-kit.chrys-adapter/v1",
+  "base_commit": "5344293d0dc95a42d2883c9470b901ae0d48c553",
+  "patch_file": "runner.patch",
+  "files": {
+    "src/chrys/orchestration/engine/assembly.py": {
+      "baseline_sha256": "bbf5af2f0c4fdbb1704880aa32e2fe571554def983f21d05a8594b06bd0020a0",
+      "patched_sha256": "e1ce0f8cd00f72e3766dc24296b608f44f8cf78ef853cd61d34e78e74664e809"
+    },
+    "src/chrys/orchestration/engine/build/builder.py": {
+      "baseline_sha256": "8a6c2e50775d1f57adb922e4578deb0f9d9bed5a2d93bebbdc37c8573002bfc9",
+      "patched_sha256": "aedba2fd41d9f5671e7b1e860ae85bf4eb811ac538d0049d3a6174cabbeeac77"
+    },
+    "src/chrys/orchestration/engine/loader.py": {
+      "baseline_sha256": "681b6245c51703112de6a006d6ebd95b4764769356aebc27a9cf8c2b3b905d23",
+      "patched_sha256": "41d8a16907a589ded53917bad6628e30f2abe524002de4b729d6620ac49e5f49"
+    },
+    "src/chrys/orchestration/session_hooks.py": {
+      "baseline_sha256": "3365084de9ad5996bebec7981eb26cef3b8c5ae4bf4ae0ebfa037ee2b200955e",
+      "patched_sha256": "e8b6de9a61e4a1be75042accc54c6eb79cd18522d4f4705caf0e8ef72ed2b427"
+    },
+    "src/chrys/orchestration/session_host.py": {
+      "baseline_sha256": "e51910fd038170b08314fd1b757f9eba2864570f274e4d8a4cabbb055645ecfa",
+      "patched_sha256": "4db598ceeb984ad968567b5ca0851b20c795e37debd1946350104f05eab42dc0"
+    },
+    "src/chrys/orchestration/sub_agents/tools.py": {
+      "baseline_sha256": "b99d4278f9e97a3a5497827bb4b4ef27d2fcbcb01bb5bff8cc56cbe643a9ceeb",
+      "patched_sha256": "50f462954085f580c7e6f10e59cd7b480b75e54b234232cf6eab45218bcffed9"
+    },
+    "src/chrys/orchestration/workflows/agent_node_build.py": {
+      "baseline_sha256": "4e3778888d74e88bf01908e63fe26a991eb4490ecdb575cdbb9081846ebc8c0c",
+      "patched_sha256": "afffce16cbb4bf2162ddc488bc85ed202baa003708ffd9930f8c9c293957f9a8"
+    },
+    "src/chrys/orchestration/workflows/coordinator.py": {
+      "baseline_sha256": "c263cd8bf3f90d1b01875f37d739fccce968205d82cc789ac2c313a2fa8548b7",
+      "patched_sha256": "002834c92351f07c92d5f78898f1277d6b678472948a403baa98b4abd6ad9091"
+    },
+    "src/chrys/orchestration/workflows/runner.py": {
+      "baseline_sha256": "49b6e139319fb07f3ee28af376873cdf7ac80c548c5b19ddff87bcf0d4198154",
+      "patched_sha256": "4a53c3f263e1a90e0779edd7413e3c41c9db9cb67e26b738b89d48beaab539fb"
+    },
+    "src/chrys/service/skills/adapter.py": {
+      "baseline_sha256": "8f7d148b62dbeb953753b95a39d02cc06d17f7993608687c51a4167cd26f37f0",
+      "patched_sha256": "91d01ed144f4ee818df284b6a49ed96ec5e5d4aec21f3bd06be9780d26b9ea96"
+    },
+    "src/chrys/service/tools/registry.py": {
+      "baseline_sha256": "284156d90a22c7181dff3149eaa3b53b0e17c30a9a29cd5a399716f11ea871c6",
+      "patched_sha256": "459b8cf7afe2eb9093d6df1a7a7d32e65710b6225985ee63648271169f11648e"
+    }
+  }
+}

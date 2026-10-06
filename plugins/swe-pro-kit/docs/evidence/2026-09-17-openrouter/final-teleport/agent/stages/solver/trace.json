@@ -1,0 +1,258 @@
+{
+  "tools": [
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "a61a7419da0f"
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "c431d03c6f17"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "a61a7419da0f",
+      "result": "asciitable\nauth\nbackend\nbpf\ncache\ncgroup\nclient\nconfig\ndefaults\nevents\nfixtures\nfuzz\nhttplib\njwt\nkube\nlabels\nlimiter\nmodules\nmultiplexer\npam\nreversetunnel\nruntimeflags.go\nsecret\nservice\nservices\nsession\nshell\nsrv\nsshca\nsshutils\nsystem\nteleagent\ntlsca\nutils\nweb\nwrappers\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "c431d03c6f17",
+      "result": "lib/benchmark does not exist\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "glob",
+      "id": "e634a3060b22"
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "59d6ac45ff92"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "59d6ac45ff92",
+      "result": "/go\nmodule github.com/gravitational/teleport\n\ngo 1.15\n\nrequire (\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "finish",
+      "tool": "glob",
+      "id": "e634a3060b22",
+      "result": "[python3 search fallback: Python regex, matching lines only]\nNo matches",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "grep",
+      "id": "d5b26606bf98"
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "cd9e26c5978b"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "cd9e26c5978b",
+      "result": "/*\nCopyright 2019 Gravitational, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n\npackage utils\n\nimport (\n\t\"fmt\"\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "finish",
+      "tool": "grep",
+      "id": "d5b26606bf98",
+      "result": "[python3 search fallback: Python regex, matching lines only]\n/app/lib/client/bench.go:32:type Benchmark struct {\n",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "read_file",
+      "id": "a19bad811c3d"
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "f9f9ff94b48e"
+    },
+    {
+      "event": "finish",
+      "tool": "read_file",
+      "id": "a19bad811c3d",
+      "result": "File: /app/lib/client/bench.go (229 lines)\n30|\n31|// Benchmark specifies benchmark requests to run\n32|type Benchmark struct {\n33|\t// Threads is amount of concurrent execution threads to run\n34|\tThreads int\n35|\t// Rate is requests per second origination rate\n36|\tRate int\n37|\t// Duration is test duration\n38|\tDuration time.Duration\n39|\t// Command is a command to run\n40|\tCommand []string\n41|\t// Interactive turns on interactive sessions\n42|\tInteractive bool\n43|}\n44|\n45|// BenchmarkResult is a result of the benchmark\n46|type BenchmarkResult struct {\n47|\t// RequestsOriginated is amount of reuqests originated\n48|\tRequestsOriginated int\n49|\t// RequestsFailed is amount of requests failed\n50|\tRequestsFailed int\n51|\t// Histogram is a duration histogram\n52|\tHistogram *hdrhistogram.Histogram\n53|\t// LastError contains last recorded error\n54|\tLastError error\n55|}\n56|\n57|// Benchmark connects to remote server and executes requests in parallel according\n58|// to benchmark spec. It returns benchmark result when completed.\n59|// This is a blocking function that can be cancelled via context argument.\n60|func (tc *TeleportClient) Benchmark(ctx context.Context, bench Benchmark) (*BenchmarkResult, error) {",
+      "metadata": {}
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "f9f9ff94b48e",
+      "result": "still doesn't exist\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "grep",
+      "id": "0906029cb08b"
+    },
+    {
+      "event": "finish",
+      "tool": "grep",
+      "id": "0906029cb08b",
+      "result": "[python3 search fallback: Python regex, matching lines only]\n/app/lib/auth/api.go:27:\t\"github.com/gravitational/trace\"\n/app/lib/auth/apiserver.go:42:\t\"github.com/gravitational/trace\"\n/app/lib/auth/auth.go:55:\t\"github.com/gravitational/trace\"\n/app/lib/auth/auth_test.go:48:\t\"github.com/gravitational/trace\"\n/app/lib/auth/auth_with_roles.go:34:\t\"github.com/gravitational/trace\"\n",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "ed9fdd574e26"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "ed9fdd574e26",
+      "result": "\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "write_file",
+      "id": "8706fc9e8200"
+    },
+    {
+      "event": "finish",
+      "tool": "write_file",
+      "id": "8706fc9e8200",
+      "result": "Written 3088 characters to /app/lib/benchmark/linear.go",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "5bf03699d30a"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "5bf03699d30a",
+      "result": "\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "a9b039248976"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "a9b039248976",
+      "result": "total 12\ndrwxr-sr-x 2 root 1001 4096 Sep 17 05:00 .\ndrwxr-sr-x 1 root 1001 4096 Sep 17 05:00 ..\n-rw-r--r-- 1 root 1001 3088 Sep 17 05:00 linear.go\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "b67918cf3777"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "b67918cf3777",
+      "result": "\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "6c0496489dbc"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "6c0496489dbc",
+      "result": "\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "27766d3ad000"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "27766d3ad000",
+      "result": "Error: task command exceeded 30s; inspect whether it is still running before retrying with a larger explicit timeout",
+      "metadata": {
+        "failed": true
+      }
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "72ee676d16f0"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "72ee676d16f0",
+      "result": "=== RUN   TestVerifyLinear\n--- PASS: TestVerifyLinear (0.00s)\n=== RUN   TestCommandAliasing\n--- PASS: TestCommandAliasing (0.00s)\nPASS\nok  \tgithub.com/gravitational/teleport/lib/benchmark\t0.057s\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "83a7bfd25fc9"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "83a7bfd25fc9",
+      "result": "Cleanup done\n\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "bash",
+      "id": "173414382ac7"
+    },
+    {
+      "event": "finish",
+      "tool": "bash",
+      "id": "173414382ac7",
+      "result": "\n\n[exit_code: 0]",
+      "metadata": {}
+    },
+    {
+      "event": "start",
+      "tool": "read_file",
+      "id": "e24a4a5e5c11"
+    },
+    {
+      "event": "finish",
+      "tool": "read_file",
+      "id": "e24a4a5e5c11",
+      "result": "File: /app/lib/benchmark/linear.go (99 lines)\n1|/*\n2|Copyright 2021 Gravitational, Inc.\n3|\n4|Licensed under the Apache License, Version 2.0 (the \"License\");\n5|you may not use this file except in compliance with the License.\n6|You may obtain a copy of the License at\n7|\n8|    http://www.apache.org/licenses/LICENSE-2.0\n9|\n10|Unless required by applicable law or agreed to in writing, software\n11|distributed under the License is distributed on an \"AS IS\" BASIS,\n12|WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n13|See the License for the specific language governing permissions and\n14|limitations under the License.\n15|*/\n16|\n17|package benchmark\n18|\n19|import (\n20|\t\"time\"\n21|\n22|\t\"github.com/gravitational/trace\"\n23|)\n24|\n25|// Config is a benchmark configuration returned by GetBenchmark.\n26|type Config struct {\n27|\t// Rate is the requests-per-second rate for this benchmark.\n28|\tRate int\n29|\t// Threads is the number of concurrent execution threads.\n30|\tThreads int\n31|\t// MinimumWindow is the minimum duration of the benchmark run.\n32|\tMinimumWindow time.Duration\n33|\t// MinimumMeasurements is the minimum number of measurements required.\n34|\tMinimumMeasurements int\n35|\t// Command is the command to execute during the benchmark.\n36|\tCommand []string\n37|}\n38|\n39|// Linear is a linear benchmark generator that produces benchmark\n40|// configurations with monotonically increasing rates.\n41|type Linear struct {\n42|\t// LowerBound is the starting requests-per-second rate for the first benchmark.\n43|\tLowerBound int\n44|\t// UpperBound is the maximum request rate; generation stops when the next\n45|\t// increment would exceed this value.\n46|\tUpperBound int\n47|\t// Step is the amount to increase the rate on each generation.\n48|\tStep int\n49|\t// MinimumMeasurements is the minimum number of measurements required.\n50|\tMinimumMeasurements int\n51|\t// MinimumWindow is the minimum duration of the benchmark run.\n52|\tMinimumWindow time.Duration\n53|\t// Threads is the number of concurrent execution threads.\n54|\tThreads int\n55|\t// Command is the command to execute during the benchmark.\n56|\tCommand []string\n57|\n58|\t// current is the internal rate tracker (starts at 0).\n59|\tcurrent int\n60|\t// started indicates whether GetBenchmark has been called at least once.\n61|\tstarted bool\n62|}\n63|\n64|// GetBenchmark returns the next benchmark configuration in the linear\n65|// sequence. It returns nil when the next increment would cause Rate to\n66|// strictly exceed UpperBound.\n67|func (l *Linear) GetBenchmark() *Config {\n68|\tif !l.started {\n69|\t\tl.started = true\n70|\t\tif l.current < l.LowerBound {\n71|\t\t\tl.current = l.LowerBound\n72|\t\t}\n73|\t} else {\n74|\t\tnext := l.current + l.Step\n75|\t\tif next > l.UpperBound {\n76|\t\t\treturn nil\n77|\t\t}\n78|\t\tl.current = next\n79|\t}\n80|\n81|\treturn &Config{\n82|\t\tRate:                l.current,\n83|\t\tThreads:             l.Threads,\n84|\t\tMinimumWindow:       l.MinimumWindow,\n85|\t\tMinimumMeasurements: l.MinimumMeasurements,\n86|\t\tCommand:             append([]string{}, l.Command...),\n87|\t}\n88|}\n89|\n90|// validateConfig checks the Linear configuration for invalid values.\n91|func validateConfig(l *Linear) error {\n92|\tif l.LowerBound > l.UpperBound {\n93|\t\treturn trace.BadParameter(\"LowerBound must be less than or equal to UpperBound\")\n94|\t}\n95|\tif l.MinimumMeasurements == 0 {\n96|\t\treturn trace.BadParameter(\"MinimumMeasurements must be non-zero\")\n97|\t}\n98|\treturn nil\n99|}",
+      "metadata": {}
+    }
+  ],
+  "usage_snapshots": {
+    "03ca00f8-bfd7-4675-b2b7-47f5b40f01f3": {
+      "input": 208043,
+      "output": 5765,
+      "cache": 190208
+    }
+  },
+  "session_totals": {
+    "input": 208043,
+    "output": 5765,
+    "cache": 190208
+  }
+}

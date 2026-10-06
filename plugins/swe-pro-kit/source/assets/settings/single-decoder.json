@@ -1,0 +1,6 @@
+{
+  "executor": "workflow",
+  "decoder_count": 1,
+  "decoder_execution": "serial",
+  "aggregate": false
+}

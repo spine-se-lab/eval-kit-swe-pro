@@ -1,0 +1,167 @@
+{
+  "events": [
+    {
+      "event": "start",
+      "tool": "taskpattern-search",
+      "id": "ce3a982ca7f2",
+      "invocation_id": ""
+    },
+    {
+      "event": "finish",
+      "tool": "taskpattern-search",
+      "id": "ce3a982ca7f2",
+      "invocation_id": "",
+      "result": {
+        "schema_version": 1,
+        "status": "partial",
+        "instance_id": "github-django__djangoproject.com-issue-2795",
+        "generation_mode": "light",
+        "prepare_if_missing": true,
+        "issue_mode": "existing_target",
+        "target_leakage_check": true,
+        "retrieval_status": "completed",
+        "retrieval_source": "live_github_search",
+        "selected_count": 3,
+        "rejected_count": 7,
+        "completed_count": 2,
+        "cache_hit_count": 0,
+        "generated_count": 2,
+        "missing_count": 1,
+        "failed_count": 1,
+        "knowledge_matches": [
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_2657"
+            },
+            "artifact_sha256": "51c8aa6a1bd4ea040c1d74162cc66bda3a337dc17e0381c25264b0e001f79a97",
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 2657,
+            "historical_issue_url": "https://github.com/django/djangoproject.com/issues/2657",
+            "historical_issue_title": "Website Updates Needed related to new Prospectus",
+            "historical_candidate_fingerprint": "346d83b6dac9f75e28d8940e",
+            "cache_hit": false,
+            "metadata": {
+              "retrieval_tier": 0,
+              "github_rank_in_query": 6,
+              "llm_similarity_score": 2,
+              "llm_misleading_risk": 1,
+              "llm_gate_policy_version": "tiered_transferability_risk_policy_v2",
+              "llm_gate_prompt_version": "search_retrieval_repair_utility_gate_v3",
+              "llm_gate_model_selected": true,
+              "llm_gate_match_basis": [
+                "same_engineering_aspect",
+                "same_patch_operation"
+              ],
+              "llm_gate_selection_tier": "fallback",
+              "llm_gate_policy_reasons": [],
+              "llm_gate_evidence": {
+                "failure_mode": null,
+                "repair_transfer": "Patch edits only the translated text inside a Django template blocktranslate, updating '$2,000+/year' to '$2,200+/year' while keeping the anchor and URL unchanged.",
+                "localization_help": "In /app/header.html, look for a {% trans %} or blocktranslate around 'Donate' and change only the visible string to 'Sponsor', leaving the '/fundraising/' href and markup intact.",
+                "main_risk": "The header may not use the same translation tag or structure as the fundraising template, so the exact edit location may differ."
+              },
+              "historical_fix_commit": "f7a53b682ec3309a07f771ce8eaa5772b4718971"
+            },
+            "knowledge_xml_length": 25711,
+            "knowledge_xml_sha256": "51c8aa6a1bd4ea040c1d74162cc66bda3a337dc17e0381c25264b0e001f79a97"
+          },
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_2534"
+            },
+            "artifact_sha256": "17603bbfe45436c9cc1e35c80c1520e3f284936fcbbb6e81eb590ff3d0a42423",
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 2534,
+            "historical_issue_url": "https://github.com/django/djangoproject.com/issues/2534",
+            "historical_issue_title": "Missing labels for donation form in fundraising page",
+            "historical_candidate_fingerprint": "4d49d124071d0ee0fdf420d5",
+            "cache_hit": false,
+            "metadata": {
+              "retrieval_tier": 0,
+              "github_rank_in_query": 7,
+              "llm_similarity_score": 2,
+              "llm_misleading_risk": 1,
+              "llm_gate_policy_version": "tiered_transferability_risk_policy_v2",
+              "llm_gate_prompt_version": "search_retrieval_repair_utility_gate_v3",
+              "llm_gate_model_selected": true,
+              "llm_gate_match_basis": [
+                "same_subsystem",
+                "same_engineering_aspect",
+                "same_patch_operation"
+              ],
+              "llm_gate_selection_tier": "fallback",
+              "llm_gate_policy_reasons": [],
+              "llm_gate_evidence": {
+                "failure_mode": null,
+                "repair_transfer": "The patch modifies a Django template string with {% translate %} and adds corresponding entries in locale/en and locale/sv django.po, showing how to introduce new visible labels safely.",
+                "localization_help": "If /app/header.html uses {% trans 'Donate' %}, replace with 'Sponsor' and, if needed, add 'Sponsor' to locale .po files to keep translations consistent.",
+                "main_risk": "It focuses on the fundraising page form, not the site header, which could tempt edits in the wrong template or unnecessary locale churn."
+              },
+              "historical_fix_commit": "938642b107337f05c9871ef47fe3bfc26cfc7d10"
+            },
+            "knowledge_xml_length": 27790,
+            "knowledge_xml_sha256": "17603bbfe45436c9cc1e35c80c1520e3f284936fcbbb6e81eb590ff3d0a42423"
+          }
+        ],
+        "unresolved_knowledge": [
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_138"
+            },
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 138,
+            "historical_candidate_fingerprint": "8df45b69c431e17f74f42bbc",
+            "reason": "artifact remains missing"
+          }
+        ],
+        "retrieval_request_id": "3e86b796cf5be5b5f68e1b50",
+        "error": null
+      },
+      "metadata": {},
+      "result_artifact": "session\\0b70d0afa466\\tool_results\\mcp_b921feb2.txt"
+    },
+    {
+      "event": "start",
+      "tool": "taskpattern-apply",
+      "id": "509504ef70ef",
+      "invocation_id": ""
+    },
+    {
+      "event": "finish",
+      "tool": "taskpattern-apply",
+      "id": "509504ef70ef",
+      "invocation_id": "",
+      "result": {
+        "status": "completed",
+        "content": {
+          "length": 28033,
+          "sha256": "98da097ab659b71fbca6508761c79d866a94a492f9360de3c6cc221221f1d01e",
+          "contains_general_knowledge": true,
+          "general_summary_sections": [
+            "general_summary/general_root_cause_analysis_steps",
+            "general_summary/bug_categorization",
+            "general_summary/relevant_architecture",
+            "general_summary/involved_components",
+            "general_summary/specific_involved_classes_functions_methods",
+            "general_summary/feature_or_functionality_of_issue",
+            "general_summary/general_fix_pattern",
+            "general_summary/summary_of_fix_checklist",
+            "general_summary/design_patterns_and_coding_practices",
+            "general_summary/additional_concepts"
+          ]
+        },
+        "source_artifact_refs": [
+          {
+            "generation_mode": "light",
+            "knowledge_cache_key": "django__djangoproject.com__issue_2657"
+          }
+        ],
+        "error": null
+      },
+      "metadata": {}
+    }
+  ]
+}

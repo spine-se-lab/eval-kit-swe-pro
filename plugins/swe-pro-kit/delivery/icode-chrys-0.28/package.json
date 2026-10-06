@@ -1,0 +1,8 @@
+{
+  "name": "codehelix-swe-pro-kit",
+  "version": "0.3.3",
+  "private": true,
+  "bin": {
+    "codehelix-swe-pro-kit": "bin/codehelix-swe-pro-kit.js"
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "schema": "codehelix.plugin_package/v1",
+  "plugin": {
+    "id": "swe-pro-kit",
+    "name": "SWE-Pro Kit",
+    "version": "0.3.3",
+    "description": {
+      "zh-CN": "SWE-bench Pro 纯基线及显式 TaskPattern evaluation setting；默认行为保持无知识增强。",
+      "en": "A clean SWE-bench Pro baseline plus an explicit TaskPattern evaluation setting; defaults remain knowledge-free."
+    }
+  },
+  "capabilities": {
+    "mining": false,
+    "application": true
+  },
+  "compatibility": {
+    "agent_system": "icode",
+    "harness": "chrys",
+    "base_commit": "5344293d0dc95a42d2883c9470b901ae0d48c553",
+    "target_version": "0.28.0",
+    "required_paths": [
+      "pyproject.toml",
+      "src/chrys"
+    ],
+    "gate": "capability"
+  },
+  "requires": {
+    "harness_features": [
+      "source_patch",
+      "agent_profile",
+      "executable"
+    ],
+    "runtimes": [
+      "python>=3.14",
+      "node>=18",
+      "git",
+      "harbor (existing Chrys Python environment)"
+    ],
+    "credentials": []
+  },
+  "dependencies": [],
+  "components": [
+    {
+      "kind": "agent_profile",
+      "name": "SWEPro Decoder, Aggregator, Mapper and Solver",
+      "count": 4
+    },
+    {
+      "kind": "python_package",
+      "name": "swe-pro-kit baseline evaluator",
+      "source": "package"
+    },
+    {
+      "kind": "executable",
+      "name": "Harbor baseline launch activation"
+    },
+    {
+      "kind": "source_patch",
+      "name": "Chrys CommandRunner injection"
+    }
+  ],
+  "surfaces": {
+    "agent_profile": {
+      "required": true,
+      "targets": {
+        "icode": "native"
+      }
+    },
+    "python_package": {
+      "required": true,
+      "targets": {
+        "icode": "native"
+      }
+    },
+    "executable": {
+      "required": true,
+      "targets": {
+        "icode": "native"
+      }
+    },
+    "source_patch": {
+      "required": true,
+      "targets": {
+        "icode": "source-overlay"
+      }
+    }
+  },
+  "data_pointers": [],
+  "harness_bindings": [
+    {
+      "harness": "chrys",
+      "adapter": "chrys.orchestration.swe_pro_baseline:ChrysAgent",
+      "implementation": "swe_pro_kit.adapters.harbor.agent:ChrysAgent"
+    }
+  ],
+  "configuration": {
+    "inputs": [
+      {
+        "id": "python",
+        "label": "已有 Chrys/Harbor Python（留空使用目标 .venv）",
+        "type": "string",
+        "required": false,
+        "default": ""
+      }
+    ]
+  },
+  "extensions": {
+    "chrys_adapter": "icode-chrys-0.28"
+  },
+  "installer": {
+    "protocol": "codehelix.plugin_installer/v1",
+    "command": [
+      "npx",
+      "--package",
+      ".",
+      "codehelix-swe-pro-kit",
+      "protocol"
+    ],
+    "operations": [
+      "check",
+      "plan",
+      "install",
+      "verify"
+    ],
+    "timeout_seconds": {
+      "check": 60,
+      "plan": 60,
+      "install": 600,
+      "verify": 300
+    },
+    "entrypoint": "installer/installer.py"
+  },
+  "installation": {
+    "target_inputs": [
+      "coding_agent",
+      "config_root"
+    ],
+    "payload": [
+      {
+        "source": "assets/profiles",
+        "target": "Chrys config agents"
+      },
+      {
+        "source": "package",
+        "target": "CodeHelix PackageStore (immutable)"
+      },
+      {
+        "source": "assets/settings",
+        "target": "CodeHelix PackageStore (runtime selection)"
+      }
+    ],
+    "patches": [
+      {
+        "id": "chrys-0.28-runner-injection",
+        "path": "adapters/chrys/icode-chrys-0.28/runner.patch",
+        "reason": "Route evaluation tools and sub-agents to the Harbor task environment"
+      }
+    ],
+    "registrations": []
+  },
+  "verification": {
+    "level": "fixture",
+    "date": "2026-09-29",
+    "versions": [],
+    "evidence": "0.28 evaluation adapter migration; real task acceptance pending."
+  },
+  "integrity": null,
+  "managed_install": {
+    "schema": "codehelix.managed_install/v1",
+    "runtimes": [
+      {
+        "id": "chrys-harbor",
+        "kind": "external",
+        "binding": {
+          "configuration": "python",
+          "default": "target/.venv/bin/python",
+          "requires": [
+            "chrys",
+            "harbor"
+          ]
+        }
+      }
+    ],
+    "skills": [],
+    "target_paths": [
+      {
+        "root": "config",
+        "path": "agents/SWEProDecoder.yaml",
+        "kind": "profile"
+      },
+      {
+        "root": "config",
+        "path": "agents/SWEProAggregator.yaml",
+        "kind": "profile"
+      },
+      {
+        "root": "config",
+        "path": "agents/SWEProMapper.yaml",
+        "kind": "profile"
+      },
+      {
+        "root": "config",
+        "path": "agents/SWEProSolver.yaml",
+        "kind": "profile"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/engine/assembly.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/engine/build/builder.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/engine/loader.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/sub_agents/tools.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/service/tools/registry.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/service/skills/adapter.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/swe_pro_baseline.py",
+        "kind": "bridge"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/service/task_environment.py",
+        "kind": "bridge"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/task_nested.py",
+        "kind": "bridge"
+      },
+      {
+        "root": "config",
+        "path": "swe-pro-kit/run.py",
+        "kind": "executable"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/session_hooks.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/session_host.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/workflows/agent_node_build.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/workflows/coordinator.py",
+        "kind": "source_patch"
+      },
+      {
+        "root": "target",
+        "path": "src/chrys/orchestration/workflows/runner.py",
+        "kind": "source_patch"
+      }
+    ]
+  }
+}

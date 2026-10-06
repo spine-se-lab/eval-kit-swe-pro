@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-17",
+  "plugin_version": "0.3.1",
+  "corrects_commit": "2ccc52130233a80ce14159252f05339fddbfafa0",
+  "delivery_lock_sha256": "131287d65b56801bf152a29898932b13863dcdebca2a5ca0eb60d5813c771f32",
+  "python_regression": {
+    "passed": 131,
+    "seconds": 44.45,
+    "real_chrys_base": "0dd38d8d42ad65480f19279ea71383ede89f6a83",
+    "real_model": false
+  },
+  "npm_test": {
+    "passed": 166
+  },
+  "swe_delivery_locks_and_rebuild": {
+    "passed": 4
+  },
+  "archive": {
+    "files_verified": 119,
+    "hashes_and_modes_match": true
+  },
+  "installed_delivery": {
+    "workflow_and_nested_parallel_serial_passed": 3,
+    "inspect": "passed",
+    "remove": "passed",
+    "six_host_files_restored": true,
+    "runtime": "MockChatClient via real Chrys/Harbor in disposable local task repositories"
+  },
+  "benchmark_performance": "not measured for restored version"
+}

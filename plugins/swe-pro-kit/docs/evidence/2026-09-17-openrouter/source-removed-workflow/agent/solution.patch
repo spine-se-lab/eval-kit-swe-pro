@@ -1,0 +1,29 @@
+diff --git a/__pycache__/pagination.cpython-312.pyc b/__pycache__/pagination.cpython-312.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..625cd094204dfa92e26b92b8726cace948172dfe
+GIT binary patch
+literal 461
+zcmXv~Jxjwt7=AAw*cvM;h}J2ngAvqO{3s6H#6dyCMXu(QX!GISMQn&5;-HHJm-a76
+ze~L@Qr344T$xX=S<Xzf6$G!JH@5l4r-CLzH3Ifk=_d-Je-;xX=c!6A&w84f4IEEIo
+zlv8z(k%uO><oT{JZHSSLE)@W#$4cL$1|KSct#k+eJ(87?kdBo|2e?&Zh*hzaNa)PL
+z0a$9ZxKDUUJrkS0M^+k`5!(##IWf<u?}}*CVSM#RDn<)M9DDtO6Xrz3bVJ6?1~CJl
+zIo!D>7Rp8saWf=!N_}c+neK4nvP_e`Sy|emG1D2xlr#A>Q{ZoE4F|!R$U7e9j_<7o
+zt*kVlgv#%ccVHXB+`-p~@rdtllJ(Bj%hu=kY+Bv^7_X(JTCXyh>^vQHs_$d-clDkz
+zkxVCHr}aLwlp0p5S-EJ3Jqs0ruRsk!X<3-8wCVbG*d*JuB4{y74*gXTLb;-&<)Zc<
+DmYH(=
+
+literal 0
+HcmV?d00001
+
+diff --git a/pagination.py b/pagination.py
+index f600fb3..bfb94c9 100644
+--- a/pagination.py
++++ b/pagination.py
+@@ -1,4 +1,6 @@
+ def paginate(items, page, page_size):
+     """Return a one-based page from a list."""
++    if page < 1 or page_size < 1:
++        raise ValueError("page and page_size must be positive")
+     start = (page - 1) * page_size
+-    return items[start:start + page_size - 1]
++    return items[start:start + page_size]

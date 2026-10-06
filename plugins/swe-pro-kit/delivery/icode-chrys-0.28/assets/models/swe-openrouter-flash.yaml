@@ -1,0 +1,17 @@
+id: swe-openrouter-flash
+name: SWE OpenRouter DeepSeek V4 Flash
+provider: openai
+api_style: chat_completions
+model_id: deepseek/deepseek-v4-flash
+base_url: https://openrouter.ai/api/v1
+max_context_tokens: 100000
+max_output_tokens: 8192
+http_connect_timeout: 10.0
+http_read_timeout: 180.0
+http_max_retries: 1
+verify_ssl: true
+bypass_proxy: false
+http_headers: ''
+chat_options: ''
+stream: false
+vision: false

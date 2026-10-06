@@ -1,0 +1,54 @@
+{
+  "schema": "swe-pro-kit.taskpattern-live-evidence/v1",
+  "date": "2026-10-02",
+  "trial": "swe-pro-sponsor-header__f2LV6RU",
+  "public_target": {
+    "repository": "django/djangoproject.com",
+    "issue_number": 2795
+  },
+  "versions": {
+    "swe_pro_kit": "0.3.2",
+    "task_pattern_advisor": "0.3.10",
+    "taskpattern_runtime": "0.8.5",
+    "chrys": "0.20.1",
+    "harbor": "0.7.0",
+    "model": "deepseek/deepseek-v4-flash"
+  },
+  "cold_start": true,
+  "roles": {
+    "decoder-0": {
+      "search_status": "partial",
+      "retrieval_source": "live_github_search",
+      "cache_hit_count": 0,
+      "generated_count": 2,
+      "failed_count": 1,
+      "apply_status": "completed",
+      "general_summary_sections": 10
+    },
+    "mapper": {
+      "search_status": "completed",
+      "retrieval_source": "live_github_search",
+      "cache_hit_count": 2,
+      "generated_count": 1,
+      "failed_count": 0,
+      "apply_status": "completed",
+      "general_summary_sections": 10
+    },
+    "solver": {
+      "search_status": "completed",
+      "retrieval_source": "live_github_search",
+      "cache_hit_count": 3,
+      "generated_count": 0,
+      "failed_count": 0,
+      "apply_status": "completed",
+      "general_summary_sections": 10
+    }
+  },
+  "derived_issue_policy": {
+    "issue_mode": "existing_target",
+    "target_leakage_check": true
+  },
+  "patch_created": true,
+  "verifier_reward": 1.0,
+  "exception": null
+}

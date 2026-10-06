@@ -1,0 +1,75 @@
+{
+  "schema": "swe-pro-kit.taskpattern_evaluation/v1",
+  "name": "taskpattern-evaluation",
+  "plugin_version": "0.3.3",
+  "host": {
+    "agent_system": "icode",
+    "harness": "chrys",
+    "target_version": "0.28.0",
+    "base_commit": "5344293d0dc95a42d2883c9470b901ae0d48c553"
+  },
+  "main_profile": {
+    "name": "SWEProTaskPatternEvaluation",
+    "id": "7a51c0de0320"
+  },
+  "setting": "settings/taskpattern-evaluation.json",
+  "bindings": "taskpattern-bindings.json",
+  "topology": {
+    "driver": "deterministic_host_workflow",
+    "order": ["decoder", "mapper", "solver"],
+    "max_total_concurrency": 1,
+    "decoder_count": 1,
+    "aggregator_enabled": false
+  },
+  "model": {
+    "profile": "models/swe-openrouter-flash.yaml",
+    "credential_env": ["SWE_PRO_API_KEY", "OPENAI_API_KEY"]
+  },
+  "taskpattern_binding": {
+    "profile": "CodeTaskPatternAdvisor",
+    "skill": "taskpattern",
+    "mcp_server": "taskpattern",
+    "allowed_tools": ["taskpattern.search", "taskpattern.apply"]
+  },
+  "task_context_allowlist": [
+    "repo",
+    "issue_description",
+    "instance_id",
+    "base_commit",
+    "issue_number"
+  ],
+  "issue_policy": {
+    "owner": "taskpattern-runtime",
+    "inputs": ["instance_id", "issue_number"],
+    "issue_mode": "derived_not_user_configurable",
+    "target_leakage_check": "existing=true,new=false"
+  },
+  "preparation": {
+    "mode": "required_before_task",
+    "scope": "repository_closed_issue_catalog",
+    "record": "<taskpattern-data>/outputs/evaluation_preparations/*.json",
+    "missing_or_invalid": "stop_before_task"
+  },
+  "timeouts": {
+    "harbor_agent_timeout_multiplier": 4,
+    "model_connect_seconds": 10,
+    "model_read_seconds": 180,
+    "taskpattern_request_seconds": 1000
+  },
+  "retries": {
+    "model_http_retries": 1,
+    "stage_retries": 0
+  },
+  "failure": {
+    "stage": "stop",
+    "taskpattern_miss": "continue_without_historical_knowledge",
+    "taskpattern_error": "stop"
+  },
+  "artifacts": {
+    "preparation": "<taskpattern-data>/outputs/evaluation_preparations/*.json",
+    "run": "<harbor-trial>/agent/baseline-run.json",
+    "patch": "<harbor-trial>/agent/solution.patch",
+    "stage_trace": "<harbor-trial>/agent/stages/<decoder-0|mapper|solver>/trace.json",
+    "taskpattern_invocations": "<harbor-trial>/agent/stages/orchestrator/taskpattern-invocations.json"
+  }
+}

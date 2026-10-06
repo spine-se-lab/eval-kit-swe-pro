@@ -1,0 +1,69 @@
+{
+  "schema": "swe-pro-kit.taskpattern_evaluation_verification/v1",
+  "date": "2026-10-01",
+  "profile": "SWEProTaskPatternEvaluation",
+  "setting": "taskpattern-evaluation",
+  "audit": {
+    "initial_worktree": "clean",
+    "combined_plugin_modified": false,
+    "baseline_profile_files_modified": false,
+    "default_lingxi_profile_modified": false,
+    "embedded_taskpattern_runtime": false,
+    "capability_consumer_added": false
+  },
+  "commands": [
+    "python plugins/swe-pro-kit/build-delivery",
+    "python -m pytest -q tests/test_swe_pro_taskpattern_evaluation.py tests/test_swe_pro_settings.py tests/test_swe_pro_kit_delivery.py tests/test_swe_pro_architecture.py --tb=short",
+    "node bin/codehelix-plugins.js validate swe-pro-kit",
+    "python -m ruff check plugins/swe-pro-kit/source/package/src/swe_pro_kit/core/taskpattern.py plugins/swe-pro-kit/source/package/src/swe_pro_kit/adapters/chrys/taskpattern.py tests/test_swe_pro_taskpattern_evaluation.py",
+    "git diff --check"
+  ],
+  "results": {
+    "focused_tests": {
+      "passed": 76,
+      "skipped": 2,
+      "failed": 0
+    },
+    "manifest_validation": "passed",
+    "lint": "passed",
+    "diff_check": "passed",
+    "real_chrys_loader": {
+      "version": "0.20.1",
+      "status": "passed",
+      "profiles": [
+        "SWEProTaskPatternDecoder",
+        "SWEProTaskPatternMapper",
+        "SWEProTaskPatternSolver"
+      ],
+      "skill_count_per_profile": 1,
+      "mcp_servers_per_profile": ["taskpattern"],
+      "allowed_tools": ["taskpattern.search", "taskpattern.apply"]
+    },
+    "taskpattern_0_8_4_mcp": {
+      "status": "started",
+      "installed_plugin_version": "0.3.8",
+      "runtime_distribution": "taskpattern-0.8.4-py3-none-any.whl",
+      "tools": ["taskpattern.search", "taskpattern.apply"],
+      "scope": "existing managed OpenCode installation; proves the independent runtime, not the Chrys evaluation run"
+    },
+    "harbor_single_instance": {
+      "status": "not_run",
+      "reason": "No matching TaskPattern 0.8.4 Chrys installation is present; the local Chrys Advisor profile is an older 0.7 deployment and the Chrys checkout has unrelated source drift."
+    },
+    "role_taskpattern_calls": {
+      "decoder": "not verified with a real model",
+      "mapper": "not verified with a real model",
+      "solver": "not verified with a real model"
+    }
+  },
+  "artifacts": {
+    "source_setting": "plugins/swe-pro-kit/source/assets/evaluations/taskpattern-evaluation.json",
+    "source_fragments": "plugins/swe-pro-kit/source/package/src/swe_pro_kit/core/taskpattern.py",
+    "source_binding": "plugins/swe-pro-kit/source/package/src/swe_pro_kit/adapters/chrys/taskpattern.py",
+    "focused_tests": "tests/test_swe_pro_taskpattern_evaluation.py",
+    "runtime_patch": "<harbor-trial>/agent/solution.patch",
+    "runtime_log": "<harbor-trial>/agent/baseline-run.json",
+    "runtime_trace": "<harbor-trial>/agent/stages/orchestrator/trace.json",
+    "taskpattern_results": "<harbor-trial>/agent/stages/orchestrator/taskpattern-invocations.json"
+  }
+}

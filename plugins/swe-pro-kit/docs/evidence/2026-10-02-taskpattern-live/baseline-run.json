@@ -1,0 +1,188 @@
+{
+  "setting": {
+    "executor": "workflow",
+    "decoder_count": 1,
+    "decoder_execution": "serial",
+    "aggregate": false
+  },
+  "bindings": {
+    "decoder": "SWEProTaskPatternDecoder",
+    "aggregator": "SWEProAggregator",
+    "mapper": "SWEProTaskPatternMapper",
+    "solver": "SWEProTaskPatternSolver"
+  },
+  "status": "completed",
+  "profiles": [
+    {
+      "role": "decoder",
+      "name": "SWEProTaskPatternDecoder",
+      "source": "C:\\Users\\t84415073\\Documents\\GitHub\\CodeHelix-Plugin\\.e\\config\\agents\\SWEProDecoder.yaml",
+      "sha256": "912ec663223afb61d151fbfb13be851c39bccd326c5e1e3b547d9a5ad6e54b52"
+    },
+    {
+      "role": "mapper",
+      "name": "SWEProTaskPatternMapper",
+      "source": "C:\\Users\\t84415073\\Documents\\GitHub\\CodeHelix-Plugin\\.e\\config\\agents\\SWEProMapper.yaml",
+      "sha256": "361a4098d04445ce4a2e344a448b96aaba1f760e3da0350e29fc1aea48bbdb7e"
+    },
+    {
+      "role": "solver",
+      "name": "SWEProTaskPatternSolver",
+      "source": "C:\\Users\\t84415073\\Documents\\GitHub\\CodeHelix-Plugin\\.e\\config\\agents\\SWEProSolver.yaml",
+      "sha256": "f85110379648dbefb37b122aea19a019e595cc76158052a495ca410fde3bab95"
+    }
+  ],
+  "model": {
+    "id": "swe-openrouter-flash",
+    "name": "SWE OpenRouter DeepSeek V4 Flash",
+    "provider": "openai",
+    "model_id": "deepseek/deepseek-v4-flash",
+    "api_style": "chat_completions",
+    "max_context_tokens": 100000,
+    "max_output_tokens": 8192,
+    "base_url": "https://openrouter.ai/api/v1",
+    "http_connect_timeout": 10.0,
+    "http_read_timeout": 180.0,
+    "http_max_retries": 1,
+    "verify_ssl": true,
+    "bypass_proxy": false,
+    "chat_options": "",
+    "stream": false,
+    "vision": false
+  },
+  "plugin_version": "0.3.2",
+  "adapter": "icode-chrys-0.20",
+  "adapter_base_commit": "0dd38d8d42ad65480f19279ea71383ede89f6a83",
+  "evaluation": {
+    "schema": "swe-pro-kit.taskpattern_evaluation/v1",
+    "name": "taskpattern-evaluation",
+    "plugin_version": "0.3.2",
+    "host": {
+      "agent_system": "icode",
+      "harness": "chrys",
+      "target_version": "0.20.1",
+      "base_commit": "0dd38d8d42ad65480f19279ea71383ede89f6a83"
+    },
+    "main_profile": {
+      "name": "SWEProTaskPatternEvaluation",
+      "id": "7a51c0de0320"
+    },
+    "setting": "settings/taskpattern-evaluation.json",
+    "bindings": "taskpattern-bindings.json",
+    "topology": {
+      "driver": "deterministic_host_workflow",
+      "order": [
+        "decoder",
+        "mapper",
+        "solver"
+      ],
+      "max_total_concurrency": 1,
+      "decoder_count": 1,
+      "aggregator_enabled": false
+    },
+    "model": {
+      "profile": "models/swe-openrouter-flash.yaml",
+      "credential_env": [
+        "SWE_PRO_API_KEY",
+        "OPENAI_API_KEY"
+      ]
+    },
+    "taskpattern_binding": {
+      "profile": "CodeTaskPatternAdvisor",
+      "skill": "taskpattern",
+      "mcp_server": "taskpattern",
+      "allowed_tools": [
+        "taskpattern.search",
+        "taskpattern.apply"
+      ]
+    },
+    "task_context_allowlist": [
+      "repo",
+      "issue_description",
+      "instance_id",
+      "base_commit",
+      "issue_number"
+    ],
+    "issue_policy": {
+      "owner": "taskpattern-runtime",
+      "inputs": [
+        "instance_id",
+        "issue_number"
+      ],
+      "issue_mode": "derived_not_user_configurable",
+      "target_leakage_check": "existing=true,new=false"
+    },
+    "timeouts": {
+      "harbor_agent_timeout_multiplier": 4,
+      "model_connect_seconds": 10,
+      "model_read_seconds": 180,
+      "taskpattern_request_seconds": 1000
+    },
+    "retries": {
+      "model_http_retries": 1,
+      "stage_retries": 0
+    },
+    "failure": {
+      "stage": "stop",
+      "taskpattern_miss": "stop",
+      "taskpattern_error": "stop"
+    },
+    "artifacts": {
+      "run": "<harbor-trial>/agent/baseline-run.json",
+      "patch": "<harbor-trial>/agent/solution.patch",
+      "stage_trace": "<harbor-trial>/agent/stages/<decoder-0|mapper|solver>/trace.json",
+      "taskpattern_invocations": "<harbor-trial>/agent/stages/orchestrator/taskpattern-invocations.json"
+    }
+  },
+  "taskpattern_context": {
+    "repo": "django/djangoproject.com",
+    "issue_number": 2795
+  },
+  "stages": [
+    {
+      "role": "decoder-0",
+      "profile": "SWEProTaskPatternDecoder",
+      "execution": {
+        "text": "Now I have all the information needed. Let me compile the comprehensive issue analysis.\n\n<issue_analysis>\n  <problem_statement>\n    - problem_statement: \"In the site header navigation, the visible translated label for the fundraising link is 'Donate', but it should be 'Sponsor' to align with sponsor-focused messaging. The `/fundraising/` link target and all surrounding markup must remain unchanged. Only the visible text needs to change.\"\n    - status: \"yes - the issue exists in the current codebase (header.html line 2 shows `{% translate \"Donate\" %}`)\"\n  </problem_statement>\n  <root_cause>\n    The root cause is a hard-coded template string `{% translate \"Donate\" %}` at line 2 of `/tmp/chrys_decoder_workspaces/b936089a6dbf5572/decoder_0/header.html`. This string is used as the visible anchor text for a navigation link pointing to `/fundraising/`. The label \"Donate\" is outdated terminology that should be updated to \"Sponsor\" as part of sponsor-focused wording efforts. Since the template uses the `{% translate %}` tag for internationalization, changing the string literal inside the tag will cause Django's translation system to look up the new msgid \"Sponsor\" instead of \"Donate\".\n  </root_cause>\n  <current_behavior>\n    The file `/tmp/chrys_decoder_workspaces/b936089a6dbf5572/decoder_0/header.html` contains a single-site-header navigation block with exactly one link:\n\n    ```html\n    <nav class=\"site-header\">\n      <a href=\"/fundraising/\">{% translate \"Donate\" %}</a>\n    </nav>\n    ```\n\n    - The file uses Django's `{% translate %}` template tag for internationalization of the link label.\n    - The link target is `/fundraising/` and the anchor element has no other attributes, CSS classes, or IDs.\n    - There are no locale/.po files present in the repository, indicating translation message catalogs are either absent or managed externally.\n    - There are no other occurrences of \"Donate\" or \"Sponsor\" elsewhere in the working tree.\n    - The full scope of the current codebase under the worktree is just this single `header.html` file and a `.git` worktree pointer.\n  </current_behavior>\n  <expected_behavior>\n    After the fix, the file `/tmp/chrys_decoder_workspaces/b936089a6dbf5572/decoder_0/header.html` should contain:\n\n    ```html\n    <nav class=\"site-header\">\n      <a href=\"/fundraising/\">{% translate \"Sponsor\" %}</a>\n    </nav>\n    ```\n\n    Specifically:\n    - **Affected file**: `/tmp/chrys_decoder_workspaces/b936089a6dbf5572/decoder_0/header.html` (the only file that needs modification; no other files are affected).\n    - **Modified element**: Line 2, the `{% translate %}` argument changes from `\"Donate\"` to `\"Sponsor\"`.\n    - **Unchanged elements**: The `<nav>` wrapper with class `site-header`, the `<a>` element, its `href=\"/fundraising/\"` attribute, and the `{% translate %}` tag structure itself all remain untouched.\n    - **No new files or APIs introduced**: The only change is the string literal inside the existing `{% translate %}` template tag.\n    - **No breaking changes**: The modification is purely cosmetic (label text) and does not introduce any new functionality, API, or configuration requirements.\n    - **Translation implication**: If Django translation message files (`.po`/`.mo`) exist externally or are compiled from this template, a new msgid \"Sponsor\" will need to be provided by translators; however, no `.po` files exist in the current worktree to update.\n\n    The final code implements the end-state behavior directly \u2014 after the fix, the rendered site header will display \"Sponsor\" as the link text instead of \"Donate\", with no intermediate or transitional state.\n  </expected_behavior>\n</issue_analysis>",
+        "usage": {
+          "input": 181712,
+          "output": 3708,
+          "cache": 165376
+        },
+        "failed": false
+      }
+    },
+    {
+      "role": "mapper",
+      "profile": "SWEProTaskPatternMapper",
+      "execution": {
+        "text": "Now I have a complete understanding of the repository state. Let me compile the solution mapping.\n\n## Solution Mapping\n\n### Exploration Results\n\nThe repository contains a single file of interest: `/app/header.html` (3 lines). It is a minimal Django template with a navigation element containing one link to `/fundraising/` with a translated label `{% translate \"Donate\" %}`.\n\nThere are:\n- No locale `.po` or `.mo` files in the working tree\n- No test files or snapshot files\n- No other occurrences of \"Donate\" or \"Sponsor\" anywhere\n- No external dependencies beyond a standard Django `{% translate %}` tag\n\n### Reproduction\n\nThe issue is purely textual. The current behavior is visible by reading the file:\n- Line 2 contains `{% translate \"Donate\" %}` as the anchor text\n- The expected behavior is `{% translate \"Sponsor\" %}`\n\nSince the repository has no test suite, locale catalogs, or other moving parts, verification consists of reading the file after the change to confirm the string was updated.\n\n### Root Cause\n\nThe hard-coded template string literal `\"Donate\"` inside the `{% translate %}` tag at line 2 of `/app/header.html` is the outdated label. It should be `\"Sponsor\"` to align with sponsor-focused messaging.\n\n### Fix\n\nThe minimal fix is to change the argument of the `{% translate %}` tag on line 2 from `\"Donate\"` to `\"Sponsor\"`. All surrounding markup (the `<nav>`, `<a>` element, `href=\"/fundraising/\"`, and the `{% translate %}` tag structure) remains untouched. No new files, APIs, or configuration changes are needed.\n\n<code_change_plan>\n[General description of the solution, fix analysis and reasoning]\nThe issue is to rename the visible navigation label \"Donate\" to \"Sponsor\" in the site header. The repository contains a single file `/app/header.html` (3 lines) with a Django `{% translate %}` tag. The fix is a one-word change inside the translate tag argument. There are no locale files, tests, or other dependencies to modify. The change is purely cosmetic \u2014 the `/fundraising/` link target and all surrounding markup remain identical.\n\n[Reproduction script directory, current script output and expected output]\nCurrent content (line 2 of /app/header.html):\n  <a href=\"/fundraising/\">{% translate \"Donate\" %}</a>\nExpected content (line 2 of /app/header.html):\n  <a href=\"/fundraising/\">{% translate \"Sponsor\" %}</a>\n\nVerification: After the change, reading `/app/header.html` should show \"Sponsor\" on line 2 instead of \"Donate\".\n\n/app/header.html:\n- Change 1: Line 2 \u2014 Change `{% translate \"Donate\" %}` to `{% translate \"Sponsor\" %}`\n  Reasoning: This is the only change needed. The string literal inside the existing `{% translate %}` template tag is updated from \"Donate\" to \"Sponsor\". The tag structure, link target (`/fundraising/`), and all surrounding markup (the `<nav>` and `<a>` elements) are preserved exactly. No other files are affected.\n</code_change_plan>",
+        "usage": {
+          "input": 138879,
+          "output": 2652,
+          "cache": 113920
+        },
+        "failed": false
+      }
+    },
+    {
+      "role": "solver",
+      "profile": "SWEProTaskPatternSolver",
+      "execution": {
+        "text": "The fix is complete. The change is exactly what the issue requested:\n\n- **File modified**: `header.html` only\n- **Change**: `{% translate \"Donate\" %}` \u2192 `{% translate \"Sponsor\" %}` on line 2\n- **Preserved**: The `/fundraising/` link target and all surrounding markup remain unchanged\n- **No test files** were modified, created, or deleted\n\nThe diff confirms a single-line, minimal change that renames the visible translated navigation label from \"Donate\" to \"Sponsor\" as required.",
+        "usage": {
+          "input": 109609,
+          "output": 1689,
+          "cache": 91648
+        },
+        "failed": false
+      }
+    }
+  ],
+  "final_output": "The fix is complete. The change is exactly what the issue requested:\n\n- **File modified**: `header.html` only\n- **Change**: `{% translate \"Donate\" %}` \u2192 `{% translate \"Sponsor\" %}` on line 2\n- **Preserved**: The `/fundraising/` link target and all surrounding markup remain unchanged\n- **No test files** were modified, created, or deleted\n\nThe diff confirms a single-line, minimal change that renames the visible translated navigation label from \"Donate\" to \"Sponsor\" as required.",
+  "usage": {
+    "input": 430200,
+    "output": 8049,
+    "cache": 370944
+  }
+}

@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Build the pure SWE-Pro baseline; shared installation Kit stays outside Delivery."""
+from __future__ import annotations
+import shutil
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT.parents[1] / "plugin-kit/build"))
+from delivery_build import copytree, digest_tree, write_declared_manifest, write_locks
+
+SOURCE = ROOT / "source"
+
+
+def build(profile: str) -> None:
+    DESTINATION = ROOT / "delivery" / profile
+    if DESTINATION.exists():
+        shutil.rmtree(DESTINATION)
+    DESTINATION.mkdir(parents=True)
+    for name in ("bin", "installer", "package", "assets", "adapters", "scripts"):
+        if (SOURCE / name).exists():
+            copytree(SOURCE / name, DESTINATION / name)
+    shutil.copy2(SOURCE / "package.json", DESTINATION / "package.json")
+    write_declared_manifest(ROOT, f"targets/{profile}.json", DESTINATION)
+    (DESTINATION / "bin/codehelix-swe-pro-kit.js").chmod(0o755)
+    write_locks(DESTINATION, {
+        "schema": "codehelix.source_lock/v1",
+        "sources": [{"repo": "yiikou/CodeHelix-Plugin", "branch": "working-tree", "commit": "ab147706bdd5505a77eaf420c9d8e5795aca43e1",
+                     "role": "Repository base; new baseline implementation is identified by source_tree_sha256"},
+                    {"repo": "chrys", "branch": "adapter-baseline", "commit": "5344293d0dc95a42d2883c9470b901ae0d48c553",
+                     "role": "Adapter baseline for this Delivery; execution checks actual patched files"}],
+        "source_tree_sha256": digest_tree(SOURCE),
+        "excluded": ["historical knowledge enhancements", "Task Pattern runtime", "model credentials", "benchmark data and run outputs"],
+    })
+
+
+if __name__ == "__main__":
+    build("icode-chrys-0.28")

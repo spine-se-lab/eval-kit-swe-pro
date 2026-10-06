@@ -1,0 +1,103 @@
+{
+    "id": "256ec8f9-dab2-4e4d-84a8-0f5473f08735",
+    "task_name": "scale-ai/instance_gravitational__teleport-6eaaf3a27e64f4ef4ef855bd35d7ec338cf17460-v626ec2a48416b10a88641359a169d99e935ff037",
+    "trial_name": "ce073ba38c2cfe5853787cb5e8d7d7dc__DrV3csM",
+    "trial_uri": "file:///private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/runs/teleport-final/ce073ba38c2cfe5853787cb5e8d7d7dc__DrV3csM",
+    "task_id": {
+        "path": "/Users/yiikou/.cache/harbor/tasks/packages/scale-ai/instance_gravitational__teleport-6eaaf3a27e64f4ef4ef855bd35d7ec338cf17460-v626ec2a48416b10a88641359a169d99e935ff037/ce073ba38c2cfe5853787cb5e8d7d7dc26e98b91f9d42de52528d708c69c6820"
+    },
+    "source": null,
+    "task_checksum": "1efd980650dbab891aa4f1106b9f8d1cd25d39276e5d1dc7cfe04ae57b7ebf81",
+    "config": {
+        "task": {
+            "path": "/Users/yiikou/.cache/harbor/tasks/packages/scale-ai/instance_gravitational__teleport-6eaaf3a27e64f4ef4ef855bd35d7ec338cf17460-v626ec2a48416b10a88641359a169d99e935ff037/ce073ba38c2cfe5853787cb5e8d7d7dc26e98b91f9d42de52528d708c69c6820",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "ce073ba38c2cfe5853787cb5e8d7d7dc__DrV3csM",
+        "trials_dir": "/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/runs/teleport-final",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": null,
+            "import_path": "chrys.swe_pro_baseline:ChrysAgent",
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "setting": "single-decoder",
+                "config_root": "/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/config"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "553fc706-465e-4d6b-8729-b3bbd630c532"
+    },
+    "agent_info": {
+        "name": "swe-pro-kit",
+        "version": "0.3.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": 814279,
+        "n_cache_tokens": 742144,
+        "n_output_tokens": 22839,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-09-17T04:50:12.638363Z",
+    "finished_at": "2026-09-17T05:20:17.500546Z",
+    "environment_setup": {
+        "started_at": "2026-09-17T04:50:12.677745Z",
+        "finished_at": "2026-09-17T04:50:15.052233Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-09-17T04:50:15.052359Z",
+        "finished_at": "2026-09-17T04:50:15.206129Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-09-17T04:50:15.206367Z",
+        "finished_at": "2026-09-17T05:04:05.313224Z"
+    },
+    "verifier": {
+        "started_at": "2026-09-17T05:04:05.722328Z",
+        "finished_at": "2026-09-17T05:20:15.520024Z"
+    },
+    "step_results": null
+}

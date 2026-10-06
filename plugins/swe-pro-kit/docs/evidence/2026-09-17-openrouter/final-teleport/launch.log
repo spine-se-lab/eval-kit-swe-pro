@@ -1,0 +1,26 @@
+  1/1 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:30:08 0:00:00
+adhoc • swe-pro-kit
+┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+┃ Trials ┃ Exceptions ┃  Mean ┃
+┡━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+│      1 │          0 │ 0.000 │
+└────────┴────────────┴───────┘
+
+┏━━━━━━━━┳━━━━━━━┓
+┃ Reward ┃ Count ┃
+┡━━━━━━━━╇━━━━━━━┩
+│ 0.0    │     1 │
+└────────┴───────┘
+
+Job Info
+Total runtime: 30m 8s
+Results written to 
+/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/r
+uns/teleport-final/result.json
+Inspect results by running `harbor view 
+/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/r
+uns`
+Share results by running `harbor upload 
+/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/r
+uns/teleport-final`
+

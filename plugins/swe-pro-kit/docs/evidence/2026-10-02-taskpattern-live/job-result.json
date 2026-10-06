@@ -1,0 +1,39 @@
+{
+    "id": "fb19d6f8-a665-454e-944e-c5502c1beb32",
+    "started_at": "2026-10-02T17:07:05.565604",
+    "updated_at": "2026-10-02T17:30:51.491724",
+    "finished_at": "2026-10-02T17:30:51.491724",
+    "n_total_trials": 1,
+    "stats": {
+        "n_completed_trials": 1,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "swe-pro-kit__adhoc": {
+                "n_trials": 1,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "swe-pro-sponsor-header__f2LV6RU"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 430200,
+        "n_cache_tokens": 370944,
+        "n_output_tokens": 8049,
+        "cost_usd": null
+    }
+}

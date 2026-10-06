@@ -1,0 +1,196 @@
+{
+  "events": [
+    {
+      "event": "start",
+      "tool": "taskpattern-search",
+      "id": "4ba796064be8",
+      "invocation_id": ""
+    },
+    {
+      "event": "finish",
+      "tool": "taskpattern-search",
+      "id": "4ba796064be8",
+      "invocation_id": "",
+      "result": {
+        "schema_version": 1,
+        "status": "completed",
+        "instance_id": "github-django__djangoproject.com-issue-2795",
+        "generation_mode": "light",
+        "prepare_if_missing": true,
+        "issue_mode": "existing_target",
+        "target_leakage_check": true,
+        "retrieval_status": "completed",
+        "retrieval_source": "live_github_search",
+        "selected_count": 3,
+        "rejected_count": 7,
+        "completed_count": 3,
+        "cache_hit_count": 3,
+        "generated_count": 0,
+        "missing_count": 0,
+        "failed_count": 0,
+        "knowledge_matches": [
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_2534"
+            },
+            "artifact_sha256": "17603bbfe45436c9cc1e35c80c1520e3f284936fcbbb6e81eb590ff3d0a42423",
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 2534,
+            "historical_issue_url": "https://github.com/django/djangoproject.com/issues/2534",
+            "historical_issue_title": "Missing labels for donation form in fundraising page",
+            "historical_candidate_fingerprint": "4d49d124071d0ee0fdf420d5",
+            "cache_hit": true,
+            "metadata": {
+              "retrieval_tier": 0,
+              "github_rank_in_query": 7,
+              "llm_similarity_score": 3,
+              "llm_misleading_risk": 1,
+              "llm_gate_policy_version": "tiered_transferability_risk_policy_v2",
+              "llm_gate_prompt_version": "search_retrieval_repair_utility_gate_v3",
+              "llm_gate_model_selected": true,
+              "llm_gate_match_basis": [
+                "same_subsystem",
+                "same_engineering_aspect",
+                "same_patch_operation",
+                "same_validation_strategy",
+                "same_localization_area"
+              ],
+              "llm_gate_selection_tier": "strong",
+              "llm_gate_policy_reasons": [],
+              "llm_gate_evidence": {
+                "failure_mode": "Both tasks change user-visible text in templates tied to the fundraising/sponsorship area and rely on Django i18n.",
+                "repair_transfer": "The patch shows editing translated template strings (e.g., {% translate 'Donation amount:' %}) and adding corresponding msgid entries in locale/en and locale/sv django.po files.",
+                "localization_help": "Change the header label inside the translate tag and add/update the new 'Sponsor' msgid in locale/*/LC_MESSAGES/django.po, then compile messages if needed.",
+                "main_risk": "Header markup/location differs from the fundraising include, so blindly editing fundraising templates would miss the header; ensure only /app/header.html is changed."
+              },
+              "historical_fix_commit": "938642b107337f05c9871ef47fe3bfc26cfc7d10"
+            },
+            "knowledge_xml_length": 27790,
+            "knowledge_xml_sha256": "17603bbfe45436c9cc1e35c80c1520e3f284936fcbbb6e81eb590ff3d0a42423"
+          },
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_2657"
+            },
+            "artifact_sha256": "51c8aa6a1bd4ea040c1d74162cc66bda3a337dc17e0381c25264b0e001f79a97",
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 2657,
+            "historical_issue_url": "https://github.com/django/djangoproject.com/issues/2657",
+            "historical_issue_title": "Website Updates Needed related to new Prospectus",
+            "historical_candidate_fingerprint": "346d83b6dac9f75e28d8940e",
+            "cache_hit": true,
+            "metadata": {
+              "retrieval_tier": 0,
+              "github_rank_in_query": 6,
+              "llm_similarity_score": 2,
+              "llm_misleading_risk": 1,
+              "llm_gate_policy_version": "tiered_transferability_risk_policy_v2",
+              "llm_gate_prompt_version": "search_retrieval_repair_utility_gate_v3",
+              "llm_gate_model_selected": true,
+              "llm_gate_match_basis": [
+                "same_subsystem",
+                "same_engineering_aspect",
+                "same_patch_operation"
+              ],
+              "llm_gate_selection_tier": "fallback",
+              "llm_gate_policy_reasons": [],
+              "llm_gate_evidence": {
+                "failure_mode": null,
+                "repair_transfer": "The patch updates user-visible copy inside a Django template translation block while preserving surrounding markup and links, which maps to changing only the label text in header.html without altering the /fundraising/ href.",
+                "localization_help": "Follow the template pattern shown (use of blocktranslate/trans): update just the translated string for the header label, keeping the i18n tag and link intact.",
+                "main_risk": "The header may use a different translation tag or include structure, so the exact markup around the label could differ."
+              },
+              "historical_fix_commit": "f7a53b682ec3309a07f771ce8eaa5772b4718971"
+            },
+            "knowledge_xml_length": 25711,
+            "knowledge_xml_sha256": "51c8aa6a1bd4ea040c1d74162cc66bda3a337dc17e0381c25264b0e001f79a97"
+          },
+          {
+            "artifact_ref": {
+              "generation_mode": "light",
+              "knowledge_cache_key": "django__djangoproject.com__issue_2552"
+            },
+            "artifact_sha256": "7cc3178e551637605075fa01b60a28170ce55a7439774cec9cd87da84ccce2fd",
+            "repo": "django/djangoproject.com",
+            "historical_issue_number": 2552,
+            "historical_issue_url": "https://github.com/django/djangoproject.com/issues/2552",
+            "historical_issue_title": "Accessibility: Missing labels on fundraising heart SVG",
+            "historical_candidate_fingerprint": "d91d1468bbe90fef3017c169",
+            "cache_hit": true,
+            "metadata": {
+              "retrieval_tier": 0,
+              "github_rank_in_query": 8,
+              "llm_similarity_score": 2,
+              "llm_misleading_risk": 1,
+              "llm_gate_policy_version": "tiered_transferability_risk_policy_v2",
+              "llm_gate_prompt_version": "search_retrieval_repair_utility_gate_v3",
+              "llm_gate_model_selected": true,
+              "llm_gate_match_basis": [
+                "same_engineering_aspect",
+                "same_patch_operation"
+              ],
+              "llm_gate_selection_tier": "fallback",
+              "llm_gate_policy_reasons": [],
+              "llm_gate_evidence": {
+                "failure_mode": null,
+                "repair_transfer": "Historical patches adjust translatable strings within Django templates while preserving surrounding markup and links, e.g., switching aria-label text via {% blocktranslate %} and keeping the same elements/attributes.",
+                "localization_help": "When changing a visible label in a template (e.g., {% translate 'Donate' %} \u2192 'Sponsor'), update corresponding msgid entries in locale files as shown by adding new strings in locale/en/LC_MESSAGES/django.po.",
+                "main_risk": "Might encourage unnecessary accessibility or multi-file edits when only a minimal label change in header.html is required."
+              },
+              "historical_fix_commit": "8b131cf30ede2c578d6d84aaf6f89ca5b2b5db46"
+            },
+            "knowledge_xml_length": 27657,
+            "knowledge_xml_sha256": "7cc3178e551637605075fa01b60a28170ce55a7439774cec9cd87da84ccce2fd"
+          }
+        ],
+        "unresolved_knowledge": [],
+        "retrieval_request_id": "3e86b796cf5be5b5f68e1b50",
+        "error": null
+      },
+      "metadata": {},
+      "result_artifact": "session\\68661637d426\\tool_results\\mcp_64767ad5.txt"
+    },
+    {
+      "event": "start",
+      "tool": "taskpattern-apply",
+      "id": "080d58619c83",
+      "invocation_id": ""
+    },
+    {
+      "event": "finish",
+      "tool": "taskpattern-apply",
+      "id": "080d58619c83",
+      "invocation_id": "",
+      "result": {
+        "status": "completed",
+        "content": {
+          "length": 30116,
+          "sha256": "6537e18f7e1435269a2332e440cccb86b733f16078d47d6474f8e87ee387ba2d",
+          "contains_general_knowledge": true,
+          "general_summary_sections": [
+            "general_summary/general_root_cause_analysis_steps",
+            "general_summary/bug_categorization",
+            "general_summary/relevant_architecture",
+            "general_summary/involved_components",
+            "general_summary/specific_involved_classes_functions_methods",
+            "general_summary/feature_or_functionality_of_issue",
+            "general_summary/general_fix_pattern",
+            "general_summary/summary_of_fix_checklist",
+            "general_summary/design_patterns_and_coding_practices",
+            "general_summary/additional_concepts"
+          ]
+        },
+        "source_artifact_refs": [
+          {
+            "generation_mode": "light",
+            "knowledge_cache_key": "django__djangoproject.com__issue_2534"
+          }
+        ],
+        "error": null
+      },
+      "metadata": {}
+    }
+  ]
+}

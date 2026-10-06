@@ -1,0 +1,17 @@
+{
+  "source_deleted": true,
+  "retained_kit": "/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/detached-home/package-store/codehelix-installer/cf707ceea243af4ce2627b4f9aadb3d3b3144a74759c2e8e55c675119c5fd38c/plugin-kit/cli/managed-cli.js",
+  "restored_host_files": [
+    "src/chrys/orchestration/engine/engine.py",
+    "src/chrys/orchestration/engine/build/builder.py",
+    "src/chrys/orchestration/engine/build/construction.py",
+    "src/chrys/orchestration/sub_agents/tools.py",
+    "src/chrys/service/tools/registry.py",
+    "src/chrys/service/skills/adapter.py"
+  ],
+  "bridge_removed": true,
+  "launcher_removed": true,
+  "external_python_retained": true,
+  "model_template_retained": true,
+  "trial_results_retained": true
+}

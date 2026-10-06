@@ -1,0 +1,6 @@
+{
+  "read_file": "Error: cannot read task file /app/no-such-file.py: task command failed (2): /bin/sh: 1: cannot open /app/no-such-file.py: No such file\n",
+  "bash": "Error: task command exceeded 1s; inspect whether it is still running before retrying with a larger explicit timeout",
+  "recovery": "recovered\n\n[exit_code: 0]",
+  "child_process_stopped": true
+}

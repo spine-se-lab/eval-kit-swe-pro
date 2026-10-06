@@ -1,0 +1,24 @@
+{
+  "schema": "codehelix.source_lock/v1",
+  "sources": [
+    {
+      "repo": "yiikou/CodeHelix-Plugin",
+      "branch": "working-tree",
+      "commit": "ab147706bdd5505a77eaf420c9d8e5795aca43e1",
+      "role": "Repository base; new baseline implementation is identified by source_tree_sha256"
+    },
+    {
+      "repo": "chrys",
+      "branch": "adapter-baseline",
+      "commit": "0dd38d8d42ad65480f19279ea71383ede89f6a83",
+      "role": "Exact upstream source accepted by the minimal runner adapter"
+    }
+  ],
+  "source_tree_sha256": "50d9b98aad8d5e71f4a873a0022ada2a44f69692033a915ddb0585940fcd4474",
+  "excluded": [
+    "historical knowledge enhancements",
+    "Task Pattern runtime",
+    "model credentials",
+    "benchmark data and run outputs"
+  ]
+}

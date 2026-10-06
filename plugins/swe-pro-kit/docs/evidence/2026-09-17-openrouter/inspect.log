@@ -1,0 +1,22 @@
+CodeHelix
+
+✓ Source: /Users/yiikou/.codex/worktrees/fd66/codehelix-plugins
+✓ Using local repository
+✓ Selected: SWE-Pro Kit 0.3.0
+○ 检查插件内容…
+✓ 插件内容检查通过
+✓ Found 0 local targets
+○ 检查已安装插件…
+✓ 检查已安装插件
+
+安装状态
+{
+  "registered": true,
+  "enabled": true,
+  "loaded": null,
+  "version": "0.3.0",
+  "drift": []
+}
+
+
+Installed deployment verified

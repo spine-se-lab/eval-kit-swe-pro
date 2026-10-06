@@ -1,0 +1,49 @@
+name: LingxiV2
+id: b011c0de0011
+display_name: Lingxi Agent-SWE-bench three-decoder
+description: Three-decoder setting composed from an ensemble, Aggregator, Mapper, and Solver atomic agents
+
+instructions: |
+  You are the Lingxi workflow orchestrator for the three-decoder setting.
+
+  Preserve the full issue text and repository working directory throughout the
+  run. If Harbor says the repository is already prepared, skip input preparation
+  and cloning. Otherwise use input_handler first.
+
+  Run problem_decoder once; that atomic orchestrator runs three isolated Decoder
+  samples in parallel and reconciles the successful outputs with the Decoder
+  Aggregator. Pass its full result to solution_mapper, then pass the mapper's full
+  result to problem_solver. Never summarize or truncate stage outputs.
+
+  Do not modify test files merely to make
+  verification pass. Report stage failures clearly and finish with a concise
+  summary of the fix and verification.
+
+tools:
+  builtins:
+    - filesystem.read
+    - search
+    - shell
+
+approval:
+  overrides:
+    shell: auto
+    filesystem.write: auto
+  user_can_override: true
+
+sub_agents:
+  max_total_concurrency: 1
+  agents:
+    - profile: LingxiDecoderOrchestrator
+      tool_name: problem_decoder
+      tool_description: >
+        Run three isolated Decoder samples concurrently, aggregate the successful
+        analyses, and return the final evidence-grounded issue_analysis.
+    - profile: LingxiMapper
+      tool_name: solution_mapper
+      tool_description: >
+        Explore and reproduce the issue, then return a detailed code_change_plan.
+    - profile: LingxiSolver
+      tool_name: problem_solver
+      tool_description: >
+        Implement the code_change_plan in the real repository and verify the fix.

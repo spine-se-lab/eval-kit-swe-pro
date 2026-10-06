@@ -1,0 +1,105 @@
+{
+    "id": "e06f8da1-c4ac-4427-a94a-ae837897b969",
+    "task_name": "local/swe-pro-sponsor-header",
+    "trial_name": "swe-pro-sponsor-header__f2LV6RU",
+    "trial_uri": "file:///C:/Users/t84415073/Documents/GitHub/CodeHelix-Plugin/.e/runs/taskpattern-evaluation/2026-10-02-final-cold-run6/swe-pro-sponsor-header__f2LV6RU",
+    "task_id": {
+        "path": "tests\\fixtures\\swe-pro-sponsor-header"
+    },
+    "source": null,
+    "task_checksum": "00dbd86bf7dec301c5f206d5a81b9957dd1613b0a830c8d2a2267ae37ce17f60",
+    "config": {
+        "task": {
+            "path": "tests\\fixtures\\swe-pro-sponsor-header",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "swe-pro-sponsor-header__f2LV6RU",
+        "trials_dir": ".e\\runs\\taskpattern-evaluation\\2026-10-02-final-cold-run6",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": 4.0,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": null,
+            "import_path": "chrys.swe_pro_baseline:ChrysAgent",
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "setting": "taskpattern-evaluation",
+                "config_root": "C:\\Users\\t84415073\\Documents\\GitHub\\CodeHelix-Plugin\\.e\\config",
+                "repo": "django/djangoproject.com",
+                "issue_number": 2795
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "fb19d6f8-a665-454e-944e-c5502c1beb32"
+    },
+    "agent_info": {
+        "name": "swe-pro-kit",
+        "version": "0.3.2",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": 430200,
+        "n_cache_tokens": 370944,
+        "n_output_tokens": 8049,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-10-02T21:07:17.730152Z",
+    "finished_at": "2026-10-02T21:30:51.472668Z",
+    "environment_setup": {
+        "started_at": "2026-10-02T21:07:18.766380Z",
+        "finished_at": "2026-10-02T21:07:28.157794Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-10-02T21:07:28.157865Z",
+        "finished_at": "2026-10-02T21:07:28.812475Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-10-02T21:07:28.812590Z",
+        "finished_at": "2026-10-02T21:30:38.541400Z"
+    },
+    "verifier": {
+        "started_at": "2026-10-02T21:30:38.541639Z",
+        "finished_at": "2026-10-02T21:30:40.793071Z"
+    },
+    "step_results": null
+}

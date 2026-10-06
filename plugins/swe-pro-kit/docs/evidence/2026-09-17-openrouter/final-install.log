@@ -1,0 +1,59 @@
+CodeHelix
+
+✓ Source: /Users/yiikou/.codex/worktrees/fd66/codehelix-plugins
+✓ Using local repository
+✓ Selected: SWE-Pro Kit 0.3.0
+○ 检查插件内容…
+✓ 插件内容检查通过
+✓ Found 0 local targets
+○ 检查目标并生成安装计划…
+○ 检查目标与安装条件…
+✓ 目标与安装条件检查通过
+
+安装计划
+  插件             SWE-Pro Kit 0.3.0
+  目标 Coding Agent iCode / Chrys（能力探测，基线 0.20.1）
+  目标位置         /private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/chrys
+  配置目录         /private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/config
+
+  将安装的组件
+  • Agent Profile
+  • Agent Profile
+  • Agent Profile
+  • Agent Profile
+  • 源码适配
+  • 源码适配
+  • 源码适配
+  • 源码适配
+  • 源码适配
+  • 源码适配
+  • bridge
+  • 可执行程序
+  • package_store
+
+  安装计划已生成，等待确认。目标 0.20.1 的能力预检通过，但该版本未验证；继续安装表示接受试装风险
+
+注意：本次安装会修改 Coding Agent 源码。
+• Route evaluation tools and sub-agents to the Harbor task environment
+
+✓ PackageStore: /private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/home/package-store/swe-pro-kit/faae5f6ad287f60d9459644028f258f72664d46b704e47e7c4f07a348b32f438
+✓ 范围：global · 接入方式：宿主适配器接线
+✓ 内容完整性：Delivery lock 校验通过 · 外部安全扫描：未配置
+○ 安装并验证插件…
+○ 检查目标与安装条件…
+✓ 目标与安装条件检查通过
+○ 保存完整 Delivery 到 PackageStore…
+✓ PackageStore 完整性校验通过
+○ 激活 Coding Agent 插件组件…
+✓ 安装状态已提交
+✓ SWE-Pro Kit 已安装
+
+安装结果
+自检通过：SWE-Pro 基线安装验证通过；模型、任务环境与评测结果需在真实运行时验收
+target_identity：已确认
+runtime_binding：已确认
+兼容性：compatible
+落盘状态：已确认
+
+
+安装完成。请按插件说明重启宿主或开启新会话。

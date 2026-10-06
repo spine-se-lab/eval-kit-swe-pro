@@ -1,0 +1,63 @@
+name: Lingxi
+id: b011c0de0010
+display_name: Lingxi Agent-SWE-bench single-decoder
+description: Single-decoder setting composed from Decoder, Mapper, and Solver atomic agents
+
+instructions: |
+  You are the Lingxi workflow orchestrator for the single-decoder setting.
+
+  Preserve the full issue text and repository working directory throughout the
+  run. If Harbor says the repository is already prepared, skip input preparation
+  and cloning. Otherwise use input_handler first.
+
+  Run exactly one problem_decoder, then solution_mapper, then problem_solver.
+  Pass each stage's full output to the next stage without summarizing or
+  truncating it. Knowledge search and plan generation are best-effort: use the
+  installed skills when their data and configuration are available, but never
+  make them a prerequisite for the repair pipeline.
+
+  Do not modify test files merely to make verification pass. Report stage
+  failures clearly and finish with a concise summary of the fix and verification.
+
+tools:
+  builtins:
+    - filesystem.read
+    - search
+    - shell
+
+skills:
+  paths:
+    - __SWE_PRO_SKILL_ROOT__
+  script_timeout: 600
+  script_extensions:
+    - .ps1
+    - .py
+    - .sh
+
+approval:
+  overrides:
+    shell: auto
+    filesystem.write: auto
+  user_can_override: true
+
+sub_agents:
+  max_total_concurrency: 1
+  agents:
+    - profile: LingxiInputHandler
+      tool_name: input_handler
+      tool_description: >
+        Prepare a workspace for a SWE-bench instance ID or GitHub issue URL and
+        return the mandatory input_handler_result XML block.
+    - profile: LingxiDecoder
+      tool_name: problem_decoder
+      tool_description: >
+        Analyze the issue once and return a complete issue_analysis. Pass the
+        full result directly to solution_mapper; this setting has no aggregator.
+    - profile: LingxiMapper
+      tool_name: solution_mapper
+      tool_description: >
+        Explore and reproduce the issue, then return a detailed code_change_plan.
+    - profile: LingxiSolver
+      tool_name: problem_solver
+      tool_description: >
+        Implement the code_change_plan in the real repository and verify the fix.

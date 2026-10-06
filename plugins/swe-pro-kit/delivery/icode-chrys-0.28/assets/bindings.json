@@ -1,0 +1,6 @@
+{
+  "decoder": "SWEProDecoder",
+  "aggregator": "SWEProAggregator",
+  "mapper": "SWEProMapper",
+  "solver": "SWEProSolver"
+}

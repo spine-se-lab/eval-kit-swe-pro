@@ -1,0 +1,27 @@
+{
+  "name": "eval-kit-swe-pro",
+  "version": "0.3.3",
+  "description": "Standalone SWE-bench Pro evaluation kit",
+  "bin": {
+    "eval-kit-swe-pro": "bin/eval-kit-swe-pro.js",
+    "swe-pro-kit": "bin/eval-kit-swe-pro.js"
+  },
+  "files": [
+    "bin",
+    "plugin-kit",
+    "plugins/swe-pro-kit",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@clack/prompts": "1.0.0",
+    "jsonc-parser": "3.3.1"
+  },
+  "scripts": {
+    "build": "node bin/eval-kit-swe-pro.js build",
+    "validate": "node bin/eval-kit-swe-pro.js validate",
+    "test": "python -m pytest -q tests"
+  }
+}

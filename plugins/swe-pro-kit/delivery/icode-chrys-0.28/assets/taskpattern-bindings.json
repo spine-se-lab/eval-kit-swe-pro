@@ -1,0 +1,6 @@
+{
+  "decoder": "SWEProTaskPatternDecoder",
+  "aggregator": "SWEProAggregator",
+  "mapper": "SWEProTaskPatternMapper",
+  "solver": "SWEProTaskPatternSolver"
+}

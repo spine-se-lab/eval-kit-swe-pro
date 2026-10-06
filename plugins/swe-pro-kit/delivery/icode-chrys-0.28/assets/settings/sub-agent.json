@@ -1,0 +1,6 @@
+{
+  "executor": "sub-agent",
+  "decoder_count": 3,
+  "decoder_execution": "parallel",
+  "aggregate": true
+}

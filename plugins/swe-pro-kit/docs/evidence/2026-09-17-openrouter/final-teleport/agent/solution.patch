@@ -1,0 +1,106 @@
+diff --git a/lib/benchmark/linear.go b/lib/benchmark/linear.go
+new file mode 100644
+index 0000000000..a114e167e6
+--- /dev/null
++++ b/lib/benchmark/linear.go
+@@ -0,0 +1,99 @@
++/*
++Copyright 2021 Gravitational, Inc.
++
++Licensed under the Apache License, Version 2.0 (the "License");
++you may not use this file except in compliance with the License.
++You may obtain a copy of the License at
++
++    http://www.apache.org/licenses/LICENSE-2.0
++
++Unless required by applicable law or agreed to in writing, software
++distributed under the License is distributed on an "AS IS" BASIS,
++WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++See the License for the specific language governing permissions and
++limitations under the License.
++*/
++
++package benchmark
++
++import (
++	"time"
++
++	"github.com/gravitational/trace"
++)
++
++// Config is a benchmark configuration returned by GetBenchmark.
++type Config struct {
++	// Rate is the requests-per-second rate for this benchmark.
++	Rate int
++	// Threads is the number of concurrent execution threads.
++	Threads int
++	// MinimumWindow is the minimum duration of the benchmark run.
++	MinimumWindow time.Duration
++	// MinimumMeasurements is the minimum number of measurements required.
++	MinimumMeasurements int
++	// Command is the command to execute during the benchmark.
++	Command []string
++}
++
++// Linear is a linear benchmark generator that produces benchmark
++// configurations with monotonically increasing rates.
++type Linear struct {
++	// LowerBound is the starting requests-per-second rate for the first benchmark.
++	LowerBound int
++	// UpperBound is the maximum request rate; generation stops when the next
++	// increment would exceed this value.
++	UpperBound int
++	// Step is the amount to increase the rate on each generation.
++	Step int
++	// MinimumMeasurements is the minimum number of measurements required.
++	MinimumMeasurements int
++	// MinimumWindow is the minimum duration of the benchmark run.
++	MinimumWindow time.Duration
++	// Threads is the number of concurrent execution threads.
++	Threads int
++	// Command is the command to execute during the benchmark.
++	Command []string
++
++	// current is the internal rate tracker (starts at 0).
++	current int
++	// started indicates whether GetBenchmark has been called at least once.
++	started bool
++}
++
++// GetBenchmark returns the next benchmark configuration in the linear
++// sequence. It returns nil when the next increment would cause Rate to
++// strictly exceed UpperBound.
++func (l *Linear) GetBenchmark() *Config {
++	if !l.started {
++		l.started = true
++		if l.current < l.LowerBound {
++			l.current = l.LowerBound
++		}
++	} else {
++		next := l.current + l.Step
++		if next > l.UpperBound {
++			return nil
++		}
++		l.current = next
++	}
++
++	return &Config{
++		Rate:                l.current,
++		Threads:             l.Threads,
++		MinimumWindow:       l.MinimumWindow,
++		MinimumMeasurements: l.MinimumMeasurements,
++		Command:             append([]string{}, l.Command...),
++	}
++}
++
++// validateConfig checks the Linear configuration for invalid values.
++func validateConfig(l *Linear) error {
++	if l.LowerBound > l.UpperBound {
++		return trace.BadParameter("LowerBound must be less than or equal to UpperBound")
++	}
++	if l.MinimumMeasurements == 0 {
++		return trace.BadParameter("MinimumMeasurements must be non-zero")
++	}
++	return nil
++}
+\ No newline at end of file

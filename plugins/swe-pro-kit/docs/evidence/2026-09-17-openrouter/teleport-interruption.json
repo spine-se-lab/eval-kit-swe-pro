@@ -1,0 +1,7 @@
+{
+  "reason": "Confirmed Harbor transport-only timeout left task compilation processes running; preserve diagnostic trial and rerun same task/model/setting after task process-group timeout repair.",
+  "pid": 67657,
+  "signal": "SIGINT",
+  "time": "2026-09-17T04:44:54.273784+00:00",
+  "followup_signal": "SIGTERM (Harbor handler raises KeyboardInterrupt)"
+}

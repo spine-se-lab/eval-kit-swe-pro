@@ -1,0 +1,17 @@
+{
+  "schema": "codehelix.plugin/v1",
+  "plugin": {
+    "id": "swe-pro-kit",
+    "name": "SWE-Pro Kit",
+    "version": "0.3.3",
+    "description": {
+      "zh-CN": "SWE-bench Pro 纯基线及显式 TaskPattern evaluation setting；默认行为保持无知识增强。",
+      "en": "A clean SWE-bench Pro baseline plus an explicit TaskPattern evaluation setting; defaults remain knowledge-free."
+    }
+  },
+  "status": "active",
+  "documentation": "README.md",
+  "targets": [
+    "targets/icode-chrys-0.28.json"
+  ]
+}

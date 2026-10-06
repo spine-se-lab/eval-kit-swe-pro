@@ -1,0 +1,103 @@
+{
+    "id": "d7d21a50-9c86-43e8-84f5-317bd70657ca",
+    "task_name": "local/swe-pro-pagination",
+    "trial_name": "swe-pro-pagination__Hy6r65b",
+    "trial_uri": "file:///private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/runs/smoke/swe-pro-pagination__Hy6r65b",
+    "task_id": {
+        "path": "/Users/yiikou/.codex/worktrees/fd66/codehelix-plugins/tests/fixtures/swe-pro-pagination"
+    },
+    "source": null,
+    "task_checksum": "257da999cafeb8e076e7f2acb1c67a1a0662e678bdc9eaaa8c989b444024092e",
+    "config": {
+        "task": {
+            "path": "/Users/yiikou/.codex/worktrees/fd66/codehelix-plugins/tests/fixtures/swe-pro-pagination",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "swe-pro-pagination__Hy6r65b",
+        "trials_dir": "/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/runs/smoke",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": null,
+            "import_path": "chrys.swe_pro_baseline:ChrysAgent",
+            "model_name": null,
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {
+                "setting": "sub-agent",
+                "config_root": "/private/var/folders/wk/2m73_501181fzy7p4b2996f80000gn/T/swe-pro-live-i0pgzjj8/config"
+            },
+            "env": {}
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts": null,
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "job_id": "2c3f43ba-c5ed-4121-9753-45d328ea7059"
+    },
+    "agent_info": {
+        "name": "swe-pro-kit",
+        "version": "0.3.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": 118060,
+        "n_cache_tokens": 79104,
+        "n_output_tokens": 18126,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-09-17T04:24:30.929153Z",
+    "finished_at": "2026-09-17T04:29:07.989370Z",
+    "environment_setup": {
+        "started_at": "2026-09-17T04:24:31.010780Z",
+        "finished_at": "2026-09-17T04:24:50.636079Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-09-17T04:24:50.636341Z",
+        "finished_at": "2026-09-17T04:24:50.636447Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-09-17T04:24:50.636845Z",
+        "finished_at": "2026-09-17T04:29:05.730534Z"
+    },
+    "verifier": {
+        "started_at": "2026-09-17T04:29:06.056752Z",
+        "finished_at": "2026-09-17T04:29:06.503211Z"
+    },
+    "step_results": null
+}
