@@ -98,3 +98,7 @@ The generated delivery is derived from `plugins/swe-pro-kit/source`; do not
 edit `plugins/swe-pro-kit/delivery` directly. Detailed setting, installation,
 and runtime behavior remains documented in
 [the plugin README](plugins/swe-pro-kit/README.md).
+
+## License
+
+MIT License. See [LICENSE](LICENSE).

@@ -10,7 +10,8 @@
     "bin",
     "plugin-kit",
     "plugins/swe-pro-kit",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=18"
@@ -23,5 +24,6 @@
     "build": "node bin/eval-kit-swe-pro.js build",
     "validate": "node bin/eval-kit-swe-pro.js validate",
     "test": "python -m pytest -q tests"
-  }
+  },
+  "license": "MIT"
 }

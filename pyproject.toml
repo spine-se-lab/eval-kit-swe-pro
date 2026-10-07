@@ -2,6 +2,8 @@
 name = "eval-kit-swe-pro-development"
 version = "0.3.3"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
 
 [dependency-groups]
 dev = ["pytest>=8.0", "pyyaml>=6.0"]
