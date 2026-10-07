@@ -14,7 +14,7 @@
       "role": "Adapter baseline for this Delivery; execution checks actual patched files"
     }
   ],
-  "source_tree_sha256": "c9285f9bb8ed408729506c9bdb5f6d868da4be1b9ce5e1fbc185d913cdf73ab5",
+  "source_tree_sha256": "5be3cd923f9aa29283aacff1276e385b68a59862b9b9257216922c948e319e75",
   "excluded": [
     "historical knowledge enhancements",
     "Task Pattern runtime",

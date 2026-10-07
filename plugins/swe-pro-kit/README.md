@@ -3,7 +3,7 @@
 `swe-pro-kit 0.3.3` 提供不含历史知识增强的 SWE-bench Pro 评估基线，以及一个显式选择的
 TaskPattern evaluation setting。Decoder、Aggregator、Mapper、Solver 是四个原子 Agent Profile；
 运行时 setting 决定组织方式，bindings 决定每个角色采用哪个 Profile。默认不加载 Task Pattern、
-Compass 或知识检索；只有 `taskpattern-evaluation` 会复用独立安装的 Task Pattern Advisor Skill/MCP。
+Compass 或知识检索；只有 `taskpattern-evaluation` 会复用独立安装的 Lingxi Advisor Skill/MCP。
 
 历史版本已保存在 [swe-pro-kit-202608](../../archives/swe-pro-kit-202608/ARCHIVE.md)；
 `swe-pro-kit-with-taskpattern` 继续作为历史独立插件保留，新 setting 不依赖它。
@@ -38,7 +38,7 @@ Compass 或知识检索；只有 `taskpattern-evaluation` 会复用独立安装�
 仅显式选择 `legacy-workflow` 才启用历史样本选择：单成功跳过汇总，零成功沿用旧文本回退。
 角色 Profile、工具能力和阶段输入未改写。sub-agent 继续使用原有根 → ensemble → Decoder/Aggregator 的嵌套组织，
 不新增轨迹判失败规则。各执行器的精确定义见[基线设计](docs/baseline-design.md)。
-安装不选 setting，每次运行都必须显式传入。TaskPattern setting 的固定模型、Skill/MCP、输入安全边界、
+安装不选 setting，每次运行都必须显式传入。Lingxi Advisor 评估绑定的固定模型、Skill/MCP、输入安全边界、
 日志和后续 LingxiV2 复用边界见 [TaskPattern evaluation setting](docs/taskpattern-evaluation.md)。
 
 ### 使用 iCode 原生 workflow 评测

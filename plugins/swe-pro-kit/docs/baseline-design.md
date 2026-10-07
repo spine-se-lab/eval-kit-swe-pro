@@ -136,7 +136,7 @@ Core 的 sub-agent 请求是 `Orchestration(setting, bindings)`，而不是某�
 
 `swe-pro-kit` 中不保留历史 knowledge module、两个检索/计划 Skill、Knowledge Agent 或 TaskPattern Runtime。
 这些旧文件包含在 `archives/swe-pro-kit-202608`，目录不注册为可安装插件；独立组合插件继续保留。
-显式 `taskpattern-evaluation` 只从独立 Task Pattern Advisor 安装出的 Chrys profile 复用 Skill/MCP
+显式 `taskpattern-evaluation` 只从独立 Lingxi Advisor 安装出的 Chrys profile 复用 Skill/MCP
 binding，并在内存中复制 baseline 原子 Profile；默认 profiles/settings 的行为不变。
 
 基线禁用隐式用户/项目 Skills、hooks 和 dotenv 读取；使用显式模型、四角色 bindings 与 setting。

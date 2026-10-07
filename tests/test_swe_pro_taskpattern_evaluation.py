@@ -46,13 +46,13 @@ def _base(role: str):
 
 def _advisor():
     server = SimpleNamespace(
-        name="taskpattern", command="managed-python", args=["managed-launcher"],
-        allowed_tools=["taskpattern.search", "taskpattern.apply"], enabled=True,
+        name="lingxi-advisor", command="managed-python", args=["managed-launcher"],
+        allowed_tools=["lingxi.advisor.search", "lingxi.advisor.apply"], enabled=True,
     )
     return SimpleNamespace(
-        name="CodeTaskPatternAdvisor",
-        skills=SimpleNamespace(paths=["/managed/skills/taskpattern", "/managed/skills/knowledge-preparation-operator"]),
-        tools=SimpleNamespace(mcp=[server, SimpleNamespace(name="taskpattern-operator")]),
+        name="LingxiAdvisor",
+        skills=SimpleNamespace(paths=["/managed/skills/lingxi-advisor", "/managed/skills/knowledge-preparation-operator"]),
+        tools=SimpleNamespace(mcp=[server, SimpleNamespace(name="lingxi-advisor-operator")]),
     )
 
 
@@ -90,9 +90,9 @@ def test_atomic_profiles_copy_baseline_and_reuse_one_installed_skill_and_runtime
 
     assert baseline.skills.paths == [] and baseline.tools.mcp == []
     assert composed.name == getattr(evaluation.bindings, role)
-    assert composed.skills.paths == ["/managed/skills/taskpattern"]
-    assert [server.name for server in composed.tools.mcp] == ["taskpattern"]
-    assert composed.tools.mcp[0].allowed_tools == ["taskpattern.search", "taskpattern.apply"]
+    assert composed.skills.paths == ["/managed/skills/lingxi-advisor"]
+    assert [server.name for server in composed.tools.mcp] == ["lingxi-advisor"]
+    assert composed.tools.mcp[0].allowed_tools == ["lingxi.advisor.search", "lingxi.advisor.apply"]
     assert composed.tools.mcp[0].request_timeout == 1000
     assert composed.tools.mcp[0].args[-6:] == [
         "--retrieval-strategy", "evaluation",
@@ -123,10 +123,10 @@ def test_atomic_profiles_copy_baseline_and_reuse_one_installed_skill_and_runtime
 
 def test_skill_and_mcp_binding_is_reusable_without_three_agent_orchestration():
     profile = _base("general")
-    bound = bind_taskpattern(profile, _advisor(), advisor_profile="CodeTaskPatternAdvisor")
+    bound = bind_taskpattern(profile, _advisor(), advisor_profile="LingxiAdvisor")
     assert bound.name == profile.name and bound.instructions == profile.instructions
-    assert bound.skills.paths == ["/managed/skills/taskpattern"]
-    assert [item.name for item in bound.tools.mcp] == ["taskpattern"]
+    assert bound.skills.paths == ["/managed/skills/lingxi-advisor"]
+    assert [item.name for item in bound.tools.mcp] == ["lingxi-advisor"]
 
 
 def test_measured_evaluation_requires_one_successful_search_and_apply_per_role():
@@ -136,8 +136,8 @@ def test_measured_evaluation_requires_one_successful_search_and_apply_per_role()
         if action == "search":
             result["knowledge_matches"] = [{"knowledge_id": "known-fix"}]
         events.extend([
-            {"event": "start", "tool": f"taskpattern-{action}", "id": action},
-            {"event": "finish", "tool": f"taskpattern-{action}", "id": action,
+            {"event": "start", "tool": f"lingxi-advisor-{action}", "id": action},
+            {"event": "finish", "tool": f"lingxi-advisor-{action}", "id": action,
              "metadata": {}, "result": json.dumps(result)},
         ])
     assert validate_taskpattern_invocations("decoder-0", events) is True
@@ -156,15 +156,15 @@ def test_measured_evaluation_requires_one_successful_search_and_apply_per_role()
 @pytest.mark.parametrize("status", ["completed", "partial", "no_candidates"])
 def test_measured_evaluation_accepts_search_without_matches_and_requires_no_apply(status):
     events = [
-        {"event": "start", "tool": "taskpattern-search", "id": "search"},
-        {"event": "finish", "tool": "taskpattern-search", "id": "search",
+        {"event": "start", "tool": "lingxi-advisor-search", "id": "search"},
+        {"event": "finish", "tool": "lingxi-advisor-search", "id": "search",
          "metadata": {}, "result": {"status": status, "knowledge_matches": []}},
     ]
     assert validate_taskpattern_invocations("mapper", events) is False
 
     unexpected_apply = events + [
-        {"event": "start", "tool": "taskpattern-apply", "id": "apply"},
-        {"event": "finish", "tool": "taskpattern-apply", "id": "apply",
+        {"event": "start", "tool": "lingxi-advisor-apply", "id": "apply"},
+        {"event": "finish", "tool": "lingxi-advisor-apply", "id": "apply",
          "metadata": {}, "result": {"status": "completed"}},
     ]
     with pytest.raises(ValueError, match="exactly 0 apply"):
@@ -186,8 +186,8 @@ def test_measured_evaluation_loads_chrys_spooled_result_before_strict_validation
     events = []
     for action in ("search", "apply"):
         events.extend([
-            {"event": "start", "tool": f"taskpattern-{action}", "id": action},
-            {"event": "finish", "tool": f"taskpattern-{action}", "id": action,
+            {"event": "start", "tool": f"lingxi-advisor-{action}", "id": action},
+            {"event": "finish", "tool": f"lingxi-advisor-{action}", "id": action,
              "metadata": {}, "result": truncated if action == "search" else {"status": "completed"}},
         ])
     validate_taskpattern_invocations("decoder-0", events, stage_dir)
@@ -200,11 +200,11 @@ def test_measured_evaluation_does_not_load_spooled_results_outside_stage_session
     outside.write_text(json.dumps({"status": "completed"}), encoding="utf-8")
     invalid = f"[Full output saved to: {outside}\n1 line]\n"
     events = [
-        {"event": "start", "tool": "taskpattern-search", "id": "search"},
-        {"event": "finish", "tool": "taskpattern-search", "id": "search",
+        {"event": "start", "tool": "lingxi-advisor-search", "id": "search"},
+        {"event": "finish", "tool": "lingxi-advisor-search", "id": "search",
          "metadata": {}, "result": invalid},
-        {"event": "start", "tool": "taskpattern-apply", "id": "apply"},
-        {"event": "finish", "tool": "taskpattern-apply", "id": "apply",
+        {"event": "start", "tool": "lingxi-advisor-apply", "id": "apply"},
+        {"event": "finish", "tool": "lingxi-advisor-apply", "id": "apply",
          "metadata": {}, "result": {"status": "completed"}},
     ]
     with pytest.raises(ValueError, match="search returned invalid JSON"):
@@ -214,7 +214,7 @@ def test_measured_evaluation_does_not_load_spooled_results_outside_stage_session
 def test_empty_advisor_turn_continuation_does_not_repeat_taskpattern_calls():
     prompt = taskpattern_continuation_prompt("mapper", applied=True)
     assert "already completed successfully" in prompt
-    assert "Do not call either TaskPattern tool again" in prompt
+    assert "Do not call either Lingxi Advisor tool again" in prompt
     assert "complete the mapper work" in prompt
     assert "non-empty final response" in prompt
     no_match = taskpattern_continuation_prompt("mapper", applied=False)
@@ -279,7 +279,7 @@ def test_evaluation_assets_do_not_embed_or_depend_on_legacy_combined_runtime():
         "repo", "issue_description", "instance_id", "base_commit", "issue_number",
     ]
     assert descriptor["issue_policy"] == {
-        "owner": "taskpattern-runtime",
+        "owner": "lingxi-advisor-runtime",
         "inputs": ["instance_id", "issue_number"],
         "issue_mode": "derived_not_user_configurable",
         "target_leakage_check": "existing=true,new=false",
@@ -287,8 +287,14 @@ def test_evaluation_assets_do_not_embed_or_depend_on_legacy_combined_runtime():
     assert descriptor["preparation"] == {
         "mode": "required_before_task",
         "scope": "repository_closed_issue_catalog",
-        "record": "<taskpattern-data>/outputs/evaluation_preparations/*.json",
+        "record": "<lingxi-advisor-data>/outputs/evaluation_preparations/*.json",
         "missing_or_invalid": "stop_before_task",
+    }
+    assert descriptor["taskpattern_binding"] == {
+        "profile": "LingxiAdvisor",
+        "skill": "lingxi-advisor",
+        "mcp_server": "lingxi-advisor",
+        "allowed_tools": ["lingxi.advisor.search", "lingxi.advisor.apply"],
     }
     assert all("Do not pass issue_mode or leakage_check" in fragment.replace("\n", " ")
                for fragment in TASKPATTERN_PROMPT_FRAGMENTS.values())

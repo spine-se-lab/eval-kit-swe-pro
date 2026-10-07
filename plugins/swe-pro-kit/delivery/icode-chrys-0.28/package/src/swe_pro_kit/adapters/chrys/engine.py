@@ -17,9 +17,9 @@ from .taskpattern import compose_atomic_profile
 
 
 def _taskpattern_action(tool: str) -> str:
-    """Return the stable TaskPattern action across Chrys MCP name renderings."""
+    """Return the stable Lingxi Advisor action across Chrys MCP name renderings."""
     normalized = tool.lower().replace("_", "-").replace(".", "-")
-    if "taskpattern" not in normalized:
+    if "lingxi-advisor" not in normalized:
         return ""
     if normalized.endswith("-search"):
         return "search"
@@ -97,29 +97,29 @@ def validate_taskpattern_invocations(
         expected = 1 if required else 0
         if len(starts) != expected or len(finishes) != expected:
             raise ValueError(
-                f"TaskPattern evaluation role {role} must complete exactly {expected} {action}; "
+                f"Lingxi Advisor evaluation role {role} must complete exactly {expected} {action}; "
                 f"observed {len(starts)} start(s) and {len(finishes)} finish(es)"
             )
         if not required:
             return None
         if starts[0].get("id") != finishes[0].get("id"):
-            raise ValueError(f"TaskPattern evaluation role {role} has an unmatched {action} invocation")
+            raise ValueError(f"Lingxi Advisor evaluation role {role} has an unmatched {action} invocation")
         metadata = finishes[0].get("metadata") or {}
         if any(metadata.get(key) for key in ("is_error", "errored", "failed", "interrupted")):
-            raise ValueError(f"TaskPattern evaluation role {role} {action} invocation failed")
+            raise ValueError(f"Lingxi Advisor evaluation role {role} {action} invocation failed")
         result = finishes[0].get("result")
         if isinstance(result, str):
             try:
                 result, _ = _resolved_taskpattern_result(result, stage_dir)
             except json.JSONDecodeError as exc:
                 raise ValueError(
-                    f"TaskPattern evaluation role {role} {action} returned invalid JSON"
+                    f"Lingxi Advisor evaluation role {role} {action} returned invalid JSON"
                 ) from exc
         allowed = {"completed", "partial", "no_candidates"} if action == "search" else {"completed", "partial"}
         if not isinstance(result, dict) or result.get("status") not in allowed:
             status = result.get("status") if isinstance(result, dict) else None
             raise ValueError(
-                f"TaskPattern evaluation role {role} {action} returned unusable status {status!r}"
+                f"Lingxi Advisor evaluation role {role} {action} returned unusable status {status!r}"
             )
         return result
 
@@ -127,7 +127,7 @@ def validate_taskpattern_invocations(
     assert search_result is not None
     matches = search_result.get("knowledge_matches", [])
     if not isinstance(matches, list):
-        raise ValueError(f"TaskPattern evaluation role {role} search returned invalid knowledge_matches")
+        raise ValueError(f"Lingxi Advisor evaluation role {role} search returned invalid knowledge_matches")
     apply_required = bool(matches)
     invocation("apply", required=apply_required)
     return apply_required
@@ -136,14 +136,14 @@ def validate_taskpattern_invocations(
 def taskpattern_continuation_prompt(role: str, *, applied: bool) -> str:
     """Resume a role whose mandatory advisor turn ended without final text."""
     completed = (
-        "The required TaskPattern Search and Apply calls already completed successfully"
+        "The required Lingxi Advisor Search and Apply calls already completed successfully"
         if applied else
-        "The required TaskPattern Search completed successfully and found no historical matches"
+        "The required Lingxi Advisor Search completed successfully and found no historical matches"
     )
     return (
         "<taskpattern_stage_continuation>\n"
         f"{completed} "
-        "in this role. Do not call either TaskPattern tool again. Now complete the "
+        "in this role. Do not call either Lingxi Advisor tool again. Now complete the "
         f"{role} work using the repository tools available to you, then return a "
         "non-empty final response for the next stage.\n"
         "</taskpattern_stage_continuation>"
@@ -223,7 +223,7 @@ class ChrysStageRunner:
             advisor_path = config / "agents" / f"{evaluation.advisor_profile}.yaml"
             if not advisor_path.is_file():
                 raise ValueError(
-                    "taskpattern-evaluation requires the installed Task Pattern Advisor Chrys profile"
+                    "taskpattern-evaluation requires the installed LingxiAdvisor Chrys profile"
                 )
             advisor = load_profile_from_yaml(advisor_path)
         roles = ("decoder", "mapper", "solver") if evaluation is not None else ("decoder", "aggregator", "mapper", "solver")
@@ -278,10 +278,10 @@ class ChrysStageRunner:
         if self.evaluation is not None:
             instruction = (
                 "<mandatory_taskpattern_gate>\n"
-                "Your first tool call MUST be taskpattern.search using the exact public "
+                "Your first tool call MUST be lingxi.advisor.search using the exact public "
                 "context in your system instructions. Before any repository tool, if "
                 "Search returns knowledge_matches, your next tool call MUST be "
-                "taskpattern.apply. Pass the unchanged matches; when host truncation "
+                "lingxi.advisor.apply. Pass the unchanged matches; when host truncation "
                 "removed large XML, pass each Search-approved artifact_ref. Do not "
                 "supply issue_mode or leakage_check. Only after Apply succeeds may you "
                 "continue this stage.\n"
@@ -333,7 +333,7 @@ class ChrysStageRunner:
         async def started(event):
             trace.append({"event": "start", "tool": event.tool_name, "id": event.call_id,
                           "invocation_id": event.origin.invocation_id})
-            if "taskpattern" in event.tool_name.lower():
+            if _taskpattern_action(event.tool_name):
                 taskpattern.append({"event": "start", "tool": event.tool_name, "id": event.call_id,
                                     "invocation_id": event.origin.invocation_id})
 
@@ -343,7 +343,7 @@ class ChrysStageRunner:
                           "result": event.result, "metadata": {
                               key: event.metadata[key] for key in ("is_error", "errored", "failed", "interrupted", "status")
                               if key in event.metadata}})
-            if "taskpattern" in event.tool_name.lower():
+            if _taskpattern_action(event.tool_name):
                 result, result_path = _resolved_taskpattern_result(event.result, stage_dir)
                 record = {
                     "event": "finish", "tool": event.tool_name, "id": event.call_id,
@@ -382,11 +382,11 @@ class ChrysStageRunner:
                 if adapter is None or failures:
                     details = ", ".join(f"{name}: {error}" for name, error in failures.items())
                     raise RuntimeError(
-                        "TaskPattern MCP failed during evaluation preflight before model execution"
+                        "Lingxi Advisor MCP failed during evaluation preflight before model execution"
                         + (f": {details}" if details else "")
                     )
                 print(
-                    f"[swe-pro/taskpattern] {role}: MCP ready with the prepared exhaustive "
+                    f"[swe-pro/lingxi-advisor] {role}: MCP ready with the prepared exhaustive "
                     "snapshot; starting mandatory Search.",
                     file=sys.stderr,
                     flush=True,

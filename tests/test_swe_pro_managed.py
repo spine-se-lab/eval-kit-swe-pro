@@ -66,7 +66,7 @@ def deployment(tmp_path):
     write(target, "src/harbor/agents/__init__.py", "")
     write(target, "src/harbor/agents/base.py", "class BaseAgent: pass\n")
     write(target, "src/harbor/cli/__init__.py", "")
-    write(target, "src/harbor/cli/main.py", "import json,os,sys\ndef app(): print(json.dumps({'python':sys.executable,'argv':sys.argv[1:],'retrieval_strategy':os.environ.get('TASKPATTERN_RETRIEVAL_STRATEGY'),'taskpattern_model':os.environ.get('TASKPATTERN_GENERATOR_MODEL'),'taskpattern_key_present':bool(os.environ.get('TASKPATTERN_GENERATOR_API_KEY'))}))\n")
+    write(target, "src/harbor/cli/main.py", "import json,os,sys\ndef app(): print(json.dumps({'python':sys.executable,'argv':sys.argv[1:],'retrieval_strategy':os.environ.get('LINGXI_ADVISOR_RETRIEVAL_STRATEGY'),'lingxi_model':os.environ.get('LINGXI_ADVISOR_GENERATOR_MODEL'),'lingxi_key_present':bool(os.environ.get('LINGXI_ADVISOR_GENERATOR_API_KEY'))}))\n")
     write(target, "src/harbor-0.7.0.dist-info/METADATA", "Metadata-Version: 2.1\nName: harbor\nVersion: 0.7.0\n")
     for relative in ("src/chrys/service/__init__.py", "src/chrys/service/profiles/__init__.py", "src/chrys/service/profiles/agents/__init__.py"):
         write(target, relative, "")
@@ -75,8 +75,8 @@ def load_profile_from_yaml(path):
     values = dict(line.split(':', 1) for line in path.read_text().splitlines() if ':' in line)
     values = {key.strip(): value.strip() for key, value in values.items()}
     profile = SimpleNamespace(name=values['name'])
-    if profile.name == 'CodeTaskPatternAdvisor':
-        server = SimpleNamespace(name='taskpattern', command=values['command'], args=[values['arg']])
+    if profile.name == 'LingxiAdvisor':
+        server = SimpleNamespace(name='lingxi-advisor', command=values['command'], args=[values['arg']])
         profile.tools = SimpleNamespace(mcp=[server])
     return profile
 """)
@@ -225,8 +225,8 @@ Path({str(prep_record)!r}).write_text(json.dumps(record))
 print(Path({str(prep_record)!r}).resolve())
 """)
     write(
-        d["config"], "agents/CodeTaskPatternAdvisor.yaml",
-        f"name: CodeTaskPatternAdvisor\ncommand: {runtime_python}\narg: {prep_script}\n",
+        d["config"], "agents/LingxiAdvisor.yaml",
+        f"name: LingxiAdvisor\ncommand: {runtime_python}\narg: {prep_script}\n",
     )
     instance_id = "instance_owner__repo-" + "a" * 40 + "-v1"
     eval_env = dict(os.environ)
@@ -241,8 +241,8 @@ print(Path({str(prep_record)!r}).resolve())
     assert evaluated.returncode == 0, evaluated.stderr
     eval_invocation = json.loads(evaluated.stdout)
     assert eval_invocation["retrieval_strategy"] is None
-    assert eval_invocation["taskpattern_model"] == "deepseek/deepseek-v4-flash"
-    assert eval_invocation["taskpattern_key_present"] is True
+    assert eval_invocation["lingxi_model"] == "deepseek/deepseek-v4-flash"
+    assert eval_invocation["lingxi_key_present"] is True
     assert "instance_id=" + instance_id in eval_invocation["argv"]
     assert "base_commit=" + "a" * 40 in eval_invocation["argv"]
     assert "evaluation_preparation=" + str(prep_record.resolve()) in eval_invocation["argv"]

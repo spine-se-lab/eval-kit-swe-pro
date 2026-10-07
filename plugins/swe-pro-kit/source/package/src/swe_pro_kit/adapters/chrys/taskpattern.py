@@ -1,4 +1,4 @@
-"""Compose TaskPattern evaluation profiles from installed native bindings."""
+"""Compose the evaluation profiles from installed Lingxi Advisor bindings."""
 
 from __future__ import annotations
 
@@ -7,9 +7,10 @@ from pathlib import Path
 from typing import Any
 
 from ...core.taskpattern import (
+    LINGXI_ADVISOR_SERVER,
+    LINGXI_ADVISOR_SKILL,
+    LINGXI_ADVISOR_TOOLS,
     TASKPATTERN_PROMPT_FRAGMENTS,
-    TASKPATTERN_SERVER,
-    TASKPATTERN_TOOLS,
     TaskPatternEvaluation,
     inject_prompt_fragment,
 )
@@ -23,18 +24,21 @@ ROLE_IDS = {
 
 
 def bind_taskpattern(profile: Any, advisor: Any, *, advisor_profile: str) -> Any:
-    """Copy any Chrys profile and attach only the installed Runtime Skill/MCP."""
+    """Copy any Chrys profile and attach only the Lingxi Advisor Runtime Skill/MCP."""
     if advisor.name != advisor_profile:
-        raise ValueError("installed TaskPattern advisor profile identity mismatch")
-    skills = [path for path in advisor.skills.paths if Path(path).name == "taskpattern"]
+        raise ValueError("installed Lingxi Advisor profile identity mismatch")
+    skills = [path for path in advisor.skills.paths if Path(path).name == LINGXI_ADVISOR_SKILL]
     if len(skills) != 1:
-        raise ValueError("installed TaskPattern advisor must expose exactly one taskpattern Skill path")
-    servers = [server for server in advisor.tools.mcp if server.name == TASKPATTERN_SERVER]
+        raise ValueError("installed Lingxi Advisor must expose exactly one lingxi-advisor Skill path")
+    servers = [server for server in advisor.tools.mcp if server.name == LINGXI_ADVISOR_SERVER]
     if len(servers) != 1:
-        raise ValueError("installed TaskPattern advisor must expose exactly one taskpattern MCP server")
+        raise ValueError("installed Lingxi Advisor must expose exactly one lingxi-advisor MCP server")
     server = servers[0]
-    if tuple(server.allowed_tools or ()) != TASKPATTERN_TOOLS:
-        raise ValueError("installed TaskPattern MCP must expose taskpattern.search and taskpattern.apply only")
+    if tuple(server.allowed_tools or ()) != LINGXI_ADVISOR_TOOLS:
+        raise ValueError(
+            "installed Lingxi Advisor MCP must expose lingxi.advisor.search and "
+            "lingxi.advisor.apply only"
+        )
 
     result = deepcopy(profile)
     result.skills.paths = skills
@@ -56,7 +60,7 @@ def compose_atomic_profile(
     evaluation_repository: str,
     evaluation_preparation: str,
 ) -> Any:
-    """Copy one baseline role, bind TaskPattern, and inject its stage fragment."""
+    """Copy one baseline role, bind Lingxi Advisor, and inject its stage fragment."""
     if role not in TASKPATTERN_PROMPT_FRAGMENTS:
         raise ValueError(f"unsupported TaskPattern role: {role}")
     result = bind_taskpattern(base, advisor, advisor_profile=evaluation.advisor_profile)
@@ -71,8 +75,8 @@ def compose_atomic_profile(
     expected_name = getattr(evaluation.bindings, role)
     result.name = expected_name
     result.id = ROLE_IDS[role]
-    result.display_name = f"{base.display_name} + TaskPattern"
-    result.description = f"{base.description} Uses the installed TaskPattern runtime during {role}."
+    result.display_name = f"{base.display_name} + Lingxi Advisor"
+    result.description = f"{base.description} Uses the installed Lingxi Advisor runtime during {role}."
     if role in {"decoder", "mapper"}:
         result.tools.builtins = [
             tool for tool in result.tools.builtins
@@ -87,12 +91,12 @@ def compose_atomic_profile(
             "\n" + context_marker + "\n"
             "The following public context was resolved by the evaluation adapter. "
             "Use its full issue_description and every non-null identity field verbatim "
-            "in taskpattern.search. Do not replace values with null and do not infer "
+            "in lingxi.advisor.search. Do not replace values with null and do not infer "
             "identity from the container path.\n"
             + taskpattern_context
             + "\nThis is a mandatory measured evaluation step. Do not skip Search "
             "because the coding task appears simple. If Search returns one or more "
-            "knowledge_matches, call taskpattern.apply with the unchanged full list, "
+            "knowledge_matches, call lingxi.advisor.apply with the unchanged full list, "
             "or its Search-approved artifact_ref if host output was truncated.\n"
             "</taskpattern_evaluation_context>\n"
         )
@@ -106,8 +110,8 @@ def compose_orchestrator_profile(profile: dict[str, Any], evaluation: TaskPatter
     result.update(
         name=evaluation.main_profile,
         id=evaluation.main_profile_id,
-        display_name="SWE-Pro TaskPattern Evaluation",
-        description="Fixed main + Decoder/Mapper/Solver TaskPattern evaluation setting",
+        display_name="SWE-Pro Lingxi Advisor Evaluation",
+        description="Fixed main + Decoder/Mapper/Solver Lingxi Advisor evaluation setting",
     )
     marker = "<taskpattern_orchestrator_contract>"
     if marker not in result["instructions"]:
@@ -116,7 +120,7 @@ def compose_orchestrator_profile(profile: dict[str, Any], evaluation: TaskPatter
             "solution_mapper, and problem_solver. Run them exactly once in that order. "
             "Do not add private paths, hidden tests, verifier data, target patches, "
             "reference solutions, credentials, or unrelated Harbor configuration to "
-            "TaskPattern calls.\n</taskpattern_orchestrator_contract>\n"
+            "Lingxi Advisor calls.\n</taskpattern_orchestrator_contract>\n"
         )
     result["model"] = {"profile_id": "swe-openrouter-flash"}
     return result

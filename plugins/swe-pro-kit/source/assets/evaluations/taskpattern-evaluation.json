@@ -26,10 +26,10 @@
     "credential_env": ["SWE_PRO_API_KEY", "OPENAI_API_KEY"]
   },
   "taskpattern_binding": {
-    "profile": "CodeTaskPatternAdvisor",
-    "skill": "taskpattern",
-    "mcp_server": "taskpattern",
-    "allowed_tools": ["taskpattern.search", "taskpattern.apply"]
+    "profile": "LingxiAdvisor",
+    "skill": "lingxi-advisor",
+    "mcp_server": "lingxi-advisor",
+    "allowed_tools": ["lingxi.advisor.search", "lingxi.advisor.apply"]
   },
   "task_context_allowlist": [
     "repo",
@@ -39,7 +39,7 @@
     "issue_number"
   ],
   "issue_policy": {
-    "owner": "taskpattern-runtime",
+    "owner": "lingxi-advisor-runtime",
     "inputs": ["instance_id", "issue_number"],
     "issue_mode": "derived_not_user_configurable",
     "target_leakage_check": "existing=true,new=false"
@@ -47,7 +47,7 @@
   "preparation": {
     "mode": "required_before_task",
     "scope": "repository_closed_issue_catalog",
-    "record": "<taskpattern-data>/outputs/evaluation_preparations/*.json",
+    "record": "<lingxi-advisor-data>/outputs/evaluation_preparations/*.json",
     "missing_or_invalid": "stop_before_task"
   },
   "timeouts": {
@@ -66,7 +66,7 @@
     "taskpattern_error": "stop"
   },
   "artifacts": {
-    "preparation": "<taskpattern-data>/outputs/evaluation_preparations/*.json",
+    "preparation": "<lingxi-advisor-data>/outputs/evaluation_preparations/*.json",
     "run": "<harbor-trial>/agent/baseline-run.json",
     "patch": "<harbor-trial>/agent/solution.patch",
     "stage_trace": "<harbor-trial>/agent/stages/<decoder-0|mapper|solver>/trace.json",

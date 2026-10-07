@@ -1,4 +1,4 @@
-"""Fixed TaskPattern evaluation contract, independent of any agent host."""
+"""Fixed Lingxi Advisor evaluation contract, independent of any agent host."""
 
 from __future__ import annotations
 
@@ -12,9 +12,10 @@ from .configuration import Bindings, Setting, load_bindings, load_setting
 
 
 EVALUATION_PRESET = "taskpattern-evaluation"
-TASKPATTERN_ADVISOR_PROFILE = "CodeTaskPatternAdvisor"
-TASKPATTERN_SERVER = "taskpattern"
-TASKPATTERN_TOOLS = ("taskpattern.search", "taskpattern.apply")
+LINGXI_ADVISOR_PROFILE = "LingxiAdvisor"
+LINGXI_ADVISOR_SKILL = "lingxi-advisor"
+LINGXI_ADVISOR_SERVER = "lingxi-advisor"
+LINGXI_ADVISOR_TOOLS = ("lingxi.advisor.search", "lingxi.advisor.apply")
 
 _INSTANCE_RE = re.compile(
     r"^instance_(?P<owner>[^/]+?)__(?P<repo>.+)-(?P<base>[0-9a-fA-F]{40})(?:-v.*)?$"
@@ -25,29 +26,29 @@ _REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 
 TASKPATTERN_PROMPT_FRAGMENTS = {
     "decoder": """<taskpattern_analysis_prompt>
-This evaluation stage MUST use the installed TaskPattern Skill during analysis.
-Before using any repository tool, call taskpattern.search exactly once with
+This evaluation stage MUST use the installed Lingxi Advisor Skill during analysis.
+Before using any repository tool, call lingxi.advisor.search exactly once with
 the full public issue description and only the non-null public identity fields in
-<taskpattern_context>. If Search returns knowledge_matches, call taskpattern.apply
+<taskpattern_context>. If Search returns knowledge_matches, call lingxi.advisor.apply
 exactly once before finishing the analysis. Preserve the returned artifact_ref;
 if the host truncates a large result, Apply can restore that Search-approved
 match from the ref. Do not pass issue_mode
-or leakage_check; TaskPattern resolves the target and leakage policy itself.
+or leakage_check; Lingxi Advisor resolves the target and leakage policy itself.
 
 Use the result to identify potentially relevant modules, files, symbols,
 behaviors, and failure patterns. Retain only evidence directly relevant to the
 current issue, and verify every historical claim against the current repository
-and worktree. TaskPattern is advisory; the current code is authoritative.
+and worktree. Lingxi Advisor is advisory; the current code is authoritative.
 This role is read-only: do not create, edit, or delete repository files.
 </taskpattern_analysis_prompt>""",
     "mapper": """<taskpattern_planning_prompt>
-This evaluation stage MUST use the installed TaskPattern Skill during planning.
-Before using any repository tool, call taskpattern.search exactly once with
+This evaluation stage MUST use the installed Lingxi Advisor Skill during planning.
+Before using any repository tool, call lingxi.advisor.search exactly once with
 the full public issue description and only the non-null public identity fields in
 <taskpattern_context>; when Search returns knowledge_matches, pass them unchanged
-to exactly one taskpattern.apply call. If host output truncation removes XML,
+to exactly one lingxi.advisor.apply call. If host output truncation removes XML,
 pass the Search-approved artifact_ref rather than reconstructing content. Do not
-pass issue_mode or leakage_check; TaskPattern owns
+pass issue_mode or leakage_check; Lingxi Advisor owns
 target resolution and the mandatory leakage policy.
 
 Map applicable knowledge to the current repository's change locations,
@@ -57,21 +58,21 @@ only and must never be copied without current-repository verification.
 This role is read-only: produce a plan, but do not create, edit, or delete files.
 For this fixed evaluation, that read-only rule overrides the baseline request to
 create or run reproduction.py. Inspect existing files/tests and describe the
-reproduction and verification steps in the plan instead. The TaskPattern Skill
+reproduction and verification steps in the plan instead. The Lingxi Advisor Skill
 has no executable workflow script; never call run_skill_script.
 </taskpattern_planning_prompt>""",
     "solver": """<taskpattern_implementation_prompt>
-This evaluation stage MUST use the installed TaskPattern Skill before implementation.
-Before using any repository tool, call taskpattern.search exactly once with the full public issue description and only the non-null
+This evaluation stage MUST use the installed Lingxi Advisor Skill before implementation.
+Before using any repository tool, call lingxi.advisor.search exactly once with the full public issue description and only the non-null
 public identity fields in <taskpattern_context>; when Search returns
-knowledge_matches, pass them unchanged to exactly one taskpattern.apply call. Do not pass
-issue_mode or leakage_check; TaskPattern derives both behaviors internally. If
+knowledge_matches, pass them unchanged to exactly one lingxi.advisor.apply call. Do not pass
+issue_mode or leakage_check; Lingxi Advisor derives both behaviors internally. If
 the host truncates XML, preserve and pass the Search-approved artifact_ref.
 
 Validate suggested files, symbols, and edits against the current code version,
 then implement, test, and run regression checks. If historical knowledge
 conflicts with the repository or test results, follow the current repository and
-tests. TaskPattern is advisory and never overrides current evidence.
+tests. Lingxi Advisor is advisory and never overrides current evidence.
 </taskpattern_implementation_prompt>""",
 }
 
@@ -90,7 +91,7 @@ class TaskPatternEvaluation:
 
 
 def load_taskpattern_evaluation(assets: str | Path) -> TaskPatternEvaluation:
-    """Load and validate the one supported TaskPattern evaluation setting."""
+    """Load and validate the one supported Lingxi Advisor evaluation setting."""
     root = Path(assets)
     source = root / "evaluations" / f"{EVALUATION_PRESET}.json"
     value = json.loads(source.read_text(encoding="utf-8"))
@@ -100,14 +101,14 @@ def load_taskpattern_evaluation(assets: str | Path) -> TaskPatternEvaluation:
         raise ValueError("TaskPattern evaluation name mismatch")
     provider = value.get("taskpattern_binding") or {}
     if provider != {
-        "profile": TASKPATTERN_ADVISOR_PROFILE,
-        "skill": "taskpattern",
-        "mcp_server": TASKPATTERN_SERVER,
-        "allowed_tools": list(TASKPATTERN_TOOLS),
+        "profile": LINGXI_ADVISOR_PROFILE,
+        "skill": LINGXI_ADVISOR_SKILL,
+        "mcp_server": LINGXI_ADVISOR_SERVER,
+        "allowed_tools": list(LINGXI_ADVISOR_TOOLS),
     }:
         raise ValueError("TaskPattern Skill/MCP binding is not the fixed runtime contract")
     if value.get("issue_policy") != {
-        "owner": "taskpattern-runtime",
+        "owner": "lingxi-advisor-runtime",
         "inputs": ["instance_id", "issue_number"],
         "issue_mode": "derived_not_user_configurable",
         "target_leakage_check": "existing=true,new=false",

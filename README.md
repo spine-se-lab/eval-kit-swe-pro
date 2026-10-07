@@ -19,9 +19,10 @@ Advisor, or any other knowledge plugin. These settings run independently:
 - `legacy-workflow`
 
 The existing `taskpattern-evaluation` setting is retained for behavioral
-parity with `swe-pro-kit`, but it is explicit and optional. It is not loaded by
-the default installation or any baseline setting, and it is not required for
-the initial standalone evaluation path.
+parity with `swe-pro-kit`, but it is explicit and optional. It now binds the
+installed `LingxiAdvisor` profile and its `lingxi.advisor.search` /
+`lingxi.advisor.apply` tools. It is not loaded by the default installation or
+any baseline setting, and it is not required for the standalone baseline path.
 
 Lingxi Advisor is maintained separately at
 [spine-se-lab/Lingxi-advisor](https://github.com/spine-se-lab/Lingxi-advisor).
