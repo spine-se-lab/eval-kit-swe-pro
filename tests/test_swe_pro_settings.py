@@ -219,6 +219,7 @@ def test_sub_agent_setting_preserves_nested_roles_and_exact_bindings(name, concu
     assert children[0]["profile"] == "SWEProDecoderOrchestrator"
     ensemble = build_decoder_orchestrator_profile(setting, selected)
     assert ensemble["sub_agents"]["max_total_concurrency"] == concurrency
+    assert "sub_agents" not in ensemble["tools"]
     assert [child["profile"] for child in ensemble["sub_agents"]["agents"]] == ["ReplacementDecoder"] * 3 + [selected.aggregator]
     assert "waiting for each result" in ensemble["instructions"] if concurrency == 1 else "3 parallel tool calls" in ensemble["instructions"]
 

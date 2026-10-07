@@ -31,7 +31,7 @@
     "package/src/swe_pro_kit/adapters/__init__.py": "a9acb0a8b72583dc430a694f676e9a3a7d8f228e8de851d00f078aed7bae8380",
     "package/src/swe_pro_kit/adapters/chrys/__init__.py": "a7df6497bb99bd0cb6e266a937482ad2b400ee4d3affba427d234653551124b4",
     "package/src/swe_pro_kit/adapters/chrys/compatibility.py": "32054699fdfa5b1ad05d359df4b32f71674ff19ee8c24c1415d0ac6edc21e757",
-    "package/src/swe_pro_kit/adapters/chrys/composition.py": "26815f14c1c6d0cc60fd8ae91d3fa11440cecdd2f165d658baa76bfec5bd4c2d",
+    "package/src/swe_pro_kit/adapters/chrys/composition.py": "00e99607bc4dba26068439178ddb5bd882f81836ba3095dce143468496e9d1ca",
     "package/src/swe_pro_kit/adapters/chrys/engine.py": "8ed8d092abc7b7352e89c640874383b48fb23d100e353a292762df6c94728a2c",
     "package/src/swe_pro_kit/adapters/chrys/native_graph.py": "b828548a33e110c1cc5b0e4fa099178986625aac5e14a9805cbc1cb835a123b0",
     "package/src/swe_pro_kit/adapters/chrys/native_workflow.py": "de41d44a076ea3285a3ebfd6f404912bbf85bcaeac82e69c1961d0f898795fb4",
@@ -57,6 +57,6 @@
     "package/src/swe_pro_kit/runtime/workspace.py": "3f067a851ad38a551a108f9165f7e5bfbc976edbcc7162d564791f2d017427b2",
     "package.json": "5513527f6316f50f588383ac5ce78374a29f659dfa0fe5c215f23833b14d7c5c",
     "scripts/run-batch.sh": "5d3af58a22b7b6e6a573579fff0a1c4276f372caf9a6fdfd7f6e386361e08527",
-    "source-lock.json": "bc41af8503b32eb5dc245164ac3b85f0ac6635fae3f3b7d3835703da436c8733"
+    "source-lock.json": "38de22a0a7220ccbaea63ce91f327ff3c55ffe42e3470909122cad102e58202e"
   }
 }

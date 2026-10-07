@@ -62,8 +62,9 @@ def test_nested_ensemble_keeps_original_prompt_and_root_keeps_only_authorized_ed
     setting = Setting('sub-agent', 3, 'parallel', True)
     old = yaml.safe_load((OLD / 'profiles/LingxiDecoderOrchestrator.yaml').read_text(encoding='utf-8'))
     after = build_decoder_orchestrator_profile(setting, binding)
-    for field in ['instructions', 'tools', 'compaction', 'approval']:
+    for field in ['instructions', 'compaction', 'approval']:
         assert after[field] == old[field]
+    assert after['tools'] == {key: value for key, value in old['tools'].items() if key != 'sub_agents'}
     for count, name in [(1, 'Lingxi'), (3, 'LingxiV2')]:
         old = yaml.safe_load((OLD / f'profiles/{name}.yaml').read_text(encoding='utf-8'))
         after = build_orchestrator_profile(Setting('sub-agent', count, 'parallel', count > 1), binding)

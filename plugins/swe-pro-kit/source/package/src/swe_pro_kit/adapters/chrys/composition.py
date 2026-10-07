@@ -52,7 +52,7 @@ def build_decoder_orchestrator_profile(setting: Setting, bindings: Bindings) -> 
     children.append(dict(original[-1], profile=bindings.aggregator))
     profile["sub_agents"] = {"max_total_concurrency": setting.decoder_count if setting.decoder_execution == "parallel" else 1,
                             "agents": children}
-    profile["tools"]["sub_agents"] = [ref["tool_name"] for ref in children]
+    profile["tools"].pop("sub_agents", None)
     text = profile["instructions"]
     if setting.decoder_count != 3:
         tools = ", ".join(f"`decoder_{i}`" for i in range(setting.decoder_count))
